@@ -1,0 +1,15 @@
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\bookinghotelroom\BookingHotelRoom.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\AuthController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ForgotPasswordController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\SignUpController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\dao\UserDAO.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\model\Room.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\model\User.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\EmailService.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\MailConfigService.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\OTPService.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\util\HibernateUtil.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\Dashboard.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\ForgotPasswordView.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\SigninView.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\SignupView.java
