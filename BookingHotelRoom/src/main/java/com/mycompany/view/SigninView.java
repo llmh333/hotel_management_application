@@ -5,6 +5,7 @@
 package com.mycompany.view;
 
 import com.mycompany.controller.ForgotPasswordController;
+import com.mycompany.request.LoginRequest;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -46,10 +47,10 @@ public class SigninView extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
-        textSignUp = new javax.swing.JLabel();
-        textForgotPassword = new javax.swing.JLabel();
         checkBoxPass = new javax.swing.JCheckBox();
-        jLabel8 = new javax.swing.JLabel();
+        btnClose = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
+        btnForgotPassword = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 128));
@@ -57,7 +58,7 @@ public class SigninView extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(779, 470));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
+        jPanel1.setBackground(new java.awt.Color(175, 17, 23));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,10 +89,10 @@ public class SigninView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(248, 138, 7));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 204, 102));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ĐĂNG NHẬP");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -112,33 +113,16 @@ public class SigninView extends javax.swing.JFrame {
 
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btnLogin.setBackground(new java.awt.Color(0, 204, 102));
+        btnLogin.setBackground(new java.awt.Color(175, 17, 23));
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Đăng nhập");
         btnLogin.setBorder(null);
         btnLogin.setBorderPainted(false);
+        btnLogin.setFocusPainted(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
-            }
-        });
-
-        textSignUp.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        textSignUp.setForeground(new java.awt.Color(0, 123, 255));
-        textSignUp.setText("Chưa có tài khoản? Đăng ký ngay");
-        textSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textSignUpMouseClicked(evt);
-            }
-        });
-
-        textForgotPassword.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        textForgotPassword.setForeground(new java.awt.Color(0, 123, 255));
-        textForgotPassword.setText("Quên mật khẩu");
-        textForgotPassword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textForgotPasswordMouseClicked(evt);
             }
         });
 
@@ -151,61 +135,76 @@ public class SigninView extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Close.png"))); // NOI18N
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-        });
+        btnClose.setBackground(new java.awt.Color(248, 138, 7));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Multiply_3.png"))); // NOI18N
+        btnClose.setBorder(null);
+
+        btnRegister.setBackground(new java.awt.Color(248, 148, 7));
+        btnRegister.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(102, 102, 102));
+        btnRegister.setText("Chưa có tài khoản? Đăng ký ngay");
+        btnRegister.setBorder(null);
+        btnRegister.setBorderPainted(false);
+        btnRegister.setContentAreaFilled(false);
+        btnRegister.setFocusPainted(false);
+
+        btnForgotPassword.setBackground(new java.awt.Color(248, 148, 7));
+        btnForgotPassword.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        btnForgotPassword.setForeground(new java.awt.Color(102, 102, 102));
+        btnForgotPassword.setText("Quên mật khẩu");
+        btnForgotPassword.setBorder(null);
+        btnForgotPassword.setBorderPainted(false);
+        btnForgotPassword.setContentAreaFilled(false);
+        btnForgotPassword.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(jLabel1)
-                .addContainerGap(154, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(78, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(checkBoxPass)
-                    .addComponent(textSignUp)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                         .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(textForgotPassword))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnForgotPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel8))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(169, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(143, 143, 143))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel8)
-                .addGap(20, 20, 20)
+                .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addGap(41, 41, 41)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxPass)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textSignUp)
+                .addComponent(btnRegister)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textForgotPassword)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(btnForgotPassword)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,20 +229,9 @@ public class SigninView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void textSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textSignUpMouseClicked
-        // TODO add your handling code here:
-        dispose();
-        new SignupView();
-    }//GEN-LAST:event_textSignUpMouseClicked
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jLabel8MouseClicked
 
     private void checkBoxPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxPassActionPerformed
         // TODO add your handling code here:
@@ -255,21 +243,33 @@ public class SigninView extends javax.swing.JFrame {
             txtPassword.setEchoChar('●'); 
         }
     }//GEN-LAST:event_checkBoxPassActionPerformed
-
-    private void textForgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textForgotPasswordMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-        ForgotPasswordView forgotPasswordView = new ForgotPasswordView();
-        forgotPasswordView.setVisible(true);
-        new ForgotPasswordController(forgotPasswordView);
-    }//GEN-LAST:event_textForgotPasswordMouseClicked
-
+    
+    public void setBtnCloseAct(ActionListener listener) {
+        btnClose.addActionListener(listener);
+    }
+    
+    public void setBtnLogin(ActionListener listener) {
+        btnLogin.addActionListener(listener);
+    }
+    
     public void setSigninAction(ActionListener listener) {
         btnLogin.addActionListener(listener);
     }
-    public void setFormSignupView(MouseListener listener) {
-        textSignUp.addMouseListener(listener);
+    
+    public void setBtnRegister(ActionListener listener) {
+        btnRegister.addActionListener(listener);
     }
+    
+    public void setBtnForgotPassword(ActionListener listener) {
+        btnForgotPassword.addActionListener(listener);
+    } 
+    
+    public LoginRequest getLoginRequest() {
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        return new LoginRequest(username, password);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -306,18 +306,18 @@ public class SigninView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnForgotPassword;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JCheckBox checkBoxPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel textForgotPassword;
-    private javax.swing.JLabel textSignUp;
     public javax.swing.JPasswordField txtPassword;
     public javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

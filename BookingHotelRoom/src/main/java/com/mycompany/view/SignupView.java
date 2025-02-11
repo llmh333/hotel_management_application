@@ -4,6 +4,7 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.request.RegisterRequest;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -61,7 +62,7 @@ public class SignupView extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(0, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 204, 102));
+        jLabel1.setForeground(new java.awt.Color(248, 148, 7));
         jLabel1.setText("ĐĂNG KÝ");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -107,22 +108,24 @@ public class SignupView extends javax.swing.JFrame {
         radioBtnFemale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         radioBtnFemale.setText("Nữ");
 
-        btnBack.setBackground(new java.awt.Color(0, 204, 102));
+        btnBack.setBackground(new java.awt.Color(248, 148, 7));
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("Trở về");
         btnBack.setBorder(null);
+        btnBack.setFocusPainted(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
 
-        btnRegister.setBackground(new java.awt.Color(0, 204, 102));
+        btnRegister.setBackground(new java.awt.Color(248, 148, 7));
         btnRegister.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegister.setForeground(new java.awt.Color(255, 255, 255));
         btnRegister.setText("Đăng ký");
         btnRegister.setBorder(null);
+        btnRegister.setFocusPainted(false);
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterActionPerformed(evt);
@@ -248,6 +251,23 @@ public class SignupView extends javax.swing.JFrame {
         btnBack.addActionListener(listener);
     }
     
+    public RegisterRequest getRegisterRequest() {
+        String sex = null;
+        if (radioBtnFemale.isSelected()) {
+            sex = "Nữ";
+        } 
+        else if (radioBtnMale.isSelected()) sex = "Nam";
+        return new RegisterRequest().builder()
+                .name(txtName.getText())
+                .username(txtUsername.getText())
+                .password(txtPassword.getText())
+                .address(txtAddress.getText())
+                .birthday(txtBirthday.getText())
+                .email(txtEmail.getText())
+                .phoneNumber(txtPhoneNummber.getText())
+                .sex(sex)
+                .build();
+    }
     /**
      * @param args the command line arguments
      */
