@@ -7,7 +7,7 @@ package com.mycompany.view;
 import com.mycompany.request.RegisterRequest;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 /**
  *
@@ -257,7 +257,7 @@ public class SignupView extends javax.swing.JFrame {
             sex = "Nữ";
         } 
         else if (radioBtnMale.isSelected()) sex = "Nam";
-        return new RegisterRequest().builder()
+        return RegisterRequest.builder()
                 .name(txtName.getText())
                 .username(txtUsername.getText())
                 .password(txtPassword.getText())
@@ -267,6 +267,39 @@ public class SignupView extends javax.swing.JFrame {
                 .phoneNumber(txtPhoneNummber.getText())
                 .sex(sex)
                 .build();
+    }
+
+    public void setTxtUsername(String txtUsername) {
+        this.txtUsername.setText(txtUsername);
+    }
+
+    public void setTxtPhoneNummber(String txtPhoneNummber) {
+        this.txtPhoneNummber.setText(txtPhoneNummber);
+    }
+
+    public void setTxtPassword(String txtPassword) {
+        this.txtPassword.setText(txtPassword);
+    }
+
+    public void setTxtName(String txtName) {
+        this.txtName.setText(txtName);
+    }
+
+    public void setTxtEmail(String txtEmail) {
+        this.txtEmail.setText(txtEmail);
+    }
+
+    public void setTxtBirthday(String txtBirthday) {
+        this.txtBirthday.setText(txtBirthday);
+    }
+
+    public void setTxtAddress(String txtAddress) {
+        this.txtAddress.setText(txtAddress);
+    }
+
+    public void setButtonGroupSex() {
+        this.radioBtnFemale.setSelected(false);
+        this.radioBtnMale.setSelected(false);
     }
     /**
      * @param args the command line arguments

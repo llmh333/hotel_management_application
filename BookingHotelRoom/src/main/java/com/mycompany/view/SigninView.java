@@ -119,6 +119,7 @@ public class SigninView extends javax.swing.JFrame {
         btnLogin.setText("Đăng nhập");
         btnLogin.setBorder(null);
         btnLogin.setBorderPainted(false);
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLogin.setFocusPainted(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +147,7 @@ public class SigninView extends javax.swing.JFrame {
         btnRegister.setBorder(null);
         btnRegister.setBorderPainted(false);
         btnRegister.setContentAreaFilled(false);
+        btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegister.setFocusPainted(false);
 
         btnForgotPassword.setBackground(new java.awt.Color(248, 148, 7));
@@ -155,6 +157,7 @@ public class SigninView extends javax.swing.JFrame {
         btnForgotPassword.setBorder(null);
         btnForgotPassword.setBorderPainted(false);
         btnForgotPassword.setContentAreaFilled(false);
+        btnForgotPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnForgotPassword.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

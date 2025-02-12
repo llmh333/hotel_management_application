@@ -9,6 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,19 +41,19 @@ public class User {
     @Column(columnDefinition = "varchar(100)", nullable = false)
     private String name;
     
-    @Column(columnDefinition = "varchar(100)", nullable = false)
+    @Column(columnDefinition = "varchar(100)", nullable = false, unique = true)
     private String email;
     
     @Column(columnDefinition = "varchar(100)", nullable = false)
     private String birthday;
     
-    @Column(columnDefinition = "varchar(100)", nullable = false)
+    @Column(columnDefinition = "varchar(100)", nullable = false, unique = true)
     private String phoneNumber;
     
     @Column(columnDefinition = "varchar(100)", nullable = false)
     private String address;
     
-    @Column(columnDefinition = "varchar(100)", nullable = false)
+    @Column(columnDefinition = "varchar(100)", nullable = false, unique = true)
     private String username;
     
     @Column(columnDefinition = "varchar(100)", nullable = false)
@@ -57,4 +61,5 @@ public class User {
     
     @Column(columnDefinition = "varchar(100)", nullable = false)
     private String sex;
+
 }

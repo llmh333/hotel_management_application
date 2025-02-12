@@ -4,6 +4,7 @@
  */
 package com.mycompany.service.Iplm;
 
+import com.mycompany.common.ExceptionHandler;
 import com.mycompany.common.PasswordEncryption;
 import static com.mycompany.dao.UserDAO.checkPassword;
 import com.mycompany.model.User;
@@ -18,6 +19,9 @@ import com.mycompany.common.PasswordEncryption;
 import static com.mycompany.common.PasswordEncryption.*;
 import com.mycompany.service.IUserService;
 import jakarta.persistence.Query;
+import com.mycompany.common.ExitCodeConfig;
+import jakarta.validation.ConstraintViolationException;
+
 /**
  *
  * @author lminh
@@ -28,8 +32,6 @@ public class UserServiceIplm implements IUserService {
     
     @Override
     public UserRespone login(LoginRequest loginRequest) {
-//       List<User> users = new ArrayList<>();
-//        System.out.println(password);
         try {
             TypedQuery<User> query = entityManager.createQuery("FROM User WHERE username = :username", User.class);
             query.setParameter("username", loginRequest.getUsername());
@@ -41,8 +43,8 @@ public class UserServiceIplm implements IUserService {
             } else return null;
             
             
-        } catch (NoResultException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            ExceptionHandler.NoResultException();
         }
         return null;
     }
@@ -76,17 +78,23 @@ public class UserServiceIplm implements IUserService {
     }
     
     @Override
-    public boolean register(RegisterRequest registerRequest) {
+    public int register(RegisterRequest registerRequest) {
         try {
-            registerRequest.setPassword(encryptPassword(registerRequest.getPassword()));
-            entityManager.getTransaction().begin();
-            entityManager.merge(convertToUser(registerRequest));
-            entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+            int checkExists = checkUserExists(registerRequest);
+            if (checkExists == ExitCodeConfig.EXIT_CODE_OK) {
+                registerRequest.setPassword(encryptPassword(registerRequest.getPassword()));
+                entityManager.getTransaction().begin();
+                entityManager.merge(convertToUser(registerRequest));
+                entityManager.getTransaction().commit();
+                return ExitCodeConfig.EXIT_CODE_OK;
+            }
+            else return checkExists;
+        } catch (NoResultException e) {
+            ExceptionHandler.NoResultException();
+        } catch (ConstraintViolationException e) {
+            return ExitCodeConfig.EXIT_CODE_EMAIL_INVALID;
         }
-        return false;
+        return ExitCodeConfig.EXIT_CODE_ERROR;
         
     }
 
@@ -106,7 +114,42 @@ public class UserServiceIplm implements IUserService {
         return false;
         
     }
-    
-    
-    
+
+    @Override
+    public int checkUserExists(RegisterRequest registerRequest) {
+        try {
+            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE username = :username", User.class);
+            query.setParameter("username", registerRequest.getUsername());
+            User user = query.getSingleResult();
+            if (user != null) {
+                return ExitCodeConfig.EXIT_CODE_USERNAME_EXISTS;
+            }
+        } catch (Exception e) {
+            ExceptionHandler.NoResultException();
+        }
+        try {
+            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE email = :email", User.class);
+            query.setParameter("email", registerRequest.getEmail());
+            User user = query.getSingleResult();
+            if (user != null) {
+                return ExitCodeConfig.EXIT_CODE_EMAIL_EXISTS;
+            }
+        } catch (Exception e) {
+            ExceptionHandler.NoResultException();
+        }
+        try {
+            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE phoneNumber = :phoneNumber", User.class);
+            query.setParameter("phoneNumber", registerRequest.getPhoneNumber());
+            User user = query.getSingleResult();
+            if (user != null) {
+                return ExitCodeConfig.EXIT_CODE_PHONENUMBER_EXISTS;
+            }
+        } catch (Exception e) {
+            ExceptionHandler.NoResultException();
+        }
+
+        return ExitCodeConfig.EXIT_CODE_OK;
+    }
+
+
 }

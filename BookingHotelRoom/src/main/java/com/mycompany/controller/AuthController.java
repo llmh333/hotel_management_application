@@ -4,6 +4,8 @@
  */
 package com.mycompany.controller;
 
+import com.mycompany.common.ExitCodeConfig;
+import com.mycompany.common.Validator;
 import com.mycompany.request.LoginRequest;
 import com.mycompany.request.RegisterRequest;
 import com.mycompany.respone.UserRespone;
@@ -15,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import com.mycompany.service.IUserService;
+import com.mycompany.view.DashboardView;
 
 /**
  *
@@ -67,8 +70,7 @@ public final class AuthController {
         }
         
     }
-    
-    
+     
     private class loginListener implements ActionListener {
 
         @Override
@@ -77,6 +79,11 @@ public final class AuthController {
             UserRespone userRespone = userService.login(loginRequest);
             if (userRespone != null) {
                 JOptionPane.showMessageDialog(signinView, "Đăng nhập thành công");
+                DashboardView dashboardView = new DashboardView();
+                DashboardController dashboardController = new DashboardController(dashboardView);
+                if (signinView != null) {
+                    signinView.dispose();
+                }
             } else {
                 JOptionPane.showMessageDialog(signinView, "Tài khoản hoặc mật khẩu không chính xác");
             }
@@ -89,9 +96,6 @@ public final class AuthController {
         public void actionPerformed(ActionEvent e) {
             SignupView signupView = new SignupView();
             AuthController authController = new AuthController(signupView);
-            if (signinView != null) {
-                signupView.setVisible(false);
-            }
             authController.showSignupView();         
         }
         
@@ -123,13 +127,54 @@ public final class AuthController {
         @Override
         public void actionPerformed(ActionEvent e) {
             RegisterRequest registerRequest = signupView.getRegisterRequest();
-            if (userService.register(registerRequest)) {
-                JOptionPane.showMessageDialog(signupView, "Đăng ký tài khoản thành công");
+            if (registerRequest.getEmail().isBlank()
+                    || registerRequest.getPassword().isBlank()
+                    || registerRequest.getUsername().isBlank()
+                    || registerRequest.getName().isBlank()
+                    || registerRequest.getSex() == null
+                    || registerRequest.getPhoneNumber().isBlank()
+                    || registerRequest.getAddress().isBlank()
+                    || registerRequest.getBirthday().isBlank()) {
+                JOptionPane.showMessageDialog(signupView, "Vui lòng điền đầu đủ thông tin");
             }
             else {
-                System.out.println(registerRequest.toString());
-                JOptionPane.showMessageDialog(signupView, "Có lỗi xảy ra, vui lòng thử lại");
+                if (Validator.isValidEmail(registerRequest.getEmail()) == false) {
+                    JOptionPane.showMessageDialog(signupView, "Email không hợp lệ");
+                } else if (Validator.isValidPhoneNumber(registerRequest.getPhoneNumber()) == false) {
+                    JOptionPane.showMessageDialog(signupView, "Số điện thoại không hợp lệ");
+                } else if (Validator.isValidPassword(registerRequest.getPassword()) == false) {
+                    JOptionPane.showMessageDialog(signupView, "Mật khẩu phải nhiều hơn 6 kí tự");
+                } else {
+                    int checkUser = userService.register(registerRequest);
+                    if (checkUser == ExitCodeConfig.EXIT_CODE_OK) {
+                        JOptionPane.showMessageDialog(signupView, "Đăng ký tài khoản thành công");
+                        signupView.setTxtUsername("");
+                        signupView.setTxtPassword("");
+                        signupView.setTxtEmail("");
+                        signupView.setTxtName("");
+                        signupView.setTxtAddress("");
+                        signupView.setTxtBirthday("");
+                        signupView.setTxtPhoneNummber("");
+                        signupView.setButtonGroupSex();
+
+                    }
+                    else if (checkUser == ExitCodeConfig.EXIT_CODE_EMAIL_EXISTS) {
+                        System.out.println(registerRequest.toString());
+                        JOptionPane.showMessageDialog(signupView, "Email đã tồn tại");
+                    }
+                    else if (checkUser == ExitCodeConfig.EXIT_CODE_USERNAME_EXISTS) {
+                        JOptionPane.showMessageDialog(signupView, "Tên đăng nhập đã tồn tại");
+                    }
+                    else if (checkUser == ExitCodeConfig.EXIT_CODE_PHONENUMBER_EXISTS) {
+                        JOptionPane.showMessageDialog(signupView, "Số điện thoại đã tồn tại");
+                    }
+                    else if (checkUser == ExitCodeConfig.EXIT_CODE_EMAIL_INVALID) {
+                        JOptionPane.showMessageDialog(signupView, "Email không hợp lệ");
+                    }
+                }
+                
             }
+
         }
         
     }

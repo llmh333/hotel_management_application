@@ -9,6 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,7 +42,24 @@ public class Room {
     @Column(columnDefinition = "varchar(100)", nullable = false)
     private String status;
     
-    @Column(columnDefinition = "INT(2)", nullable = false)
-    private int quantity;
+    @Column(columnDefinition = "varchar(10)", nullable = false)
+    private String roomType;
+    
+    @Column(columnDefinition = "varchar(100)", nullable = false)
+    private String roomFeature;
+    
+    @Column(columnDefinition = "varchar(10)", nullable = false)
+    private String quantity;
+
+    @Column(nullable = false)
+    private double price;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private LocalDateTime checkInTime;
+    
+    private LocalDateTime ngayOutTime;
     
 }

@@ -4,11 +4,13 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.controller.RoomMapController;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
@@ -42,6 +44,7 @@ public class DashboardView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupDashboard = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         panelRoomMap = new javax.swing.JPanel();
         panelBoderRoomMap = new javax.swing.JPanel();
@@ -61,17 +64,11 @@ public class DashboardView extends javax.swing.JFrame {
         panelBorderInforPerson = new javax.swing.JPanel();
         btnPersonInfor = new javax.swing.JButton();
         panelScreen = new javax.swing.JPanel();
-        roomMapPanel1 = new com.mycompany.view.RoomMapPanel();
-        roomManagePanel1 = new com.mycompany.view.RoomManagePanel();
-        paymentPanel1 = new com.mycompany.view.PaymentPanel();
-        statisticalPanel1 = new com.mycompany.view.StatisticalPanel();
-        inforPersonPanel1 = new com.mycompany.view.InforPersonPanel();
         jPanel2 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(175, 17, 23));
@@ -103,6 +100,7 @@ public class DashboardView extends javax.swing.JFrame {
         btnRoomMap.setText("Sơ đồ phòng");
         btnRoomMap.setBorder(null);
         btnRoomMap.setBorderPainted(false);
+        buttonGroupDashboard.add(btnRoomMap);
         btnRoomMap.setFocusPainted(false);
         btnRoomMap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         panelRoomMap.add(btnRoomMap, java.awt.BorderLayout.CENTER);
@@ -132,6 +130,7 @@ public class DashboardView extends javax.swing.JFrame {
         btnRoomManage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Request Service_2.png"))); // NOI18N
         btnRoomManage.setText("Quản lý phòng");
         btnRoomManage.setBorder(null);
+        buttonGroupDashboard.add(btnRoomManage);
         btnRoomManage.setFocusPainted(false);
         btnRoomManage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         panelRoomManage.add(btnRoomManage, java.awt.BorderLayout.CENTER);
@@ -158,9 +157,10 @@ public class DashboardView extends javax.swing.JFrame {
         btnPayment.setBackground(new java.awt.Color(175, 17, 23));
         btnPayment.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPayment.setForeground(new java.awt.Color(255, 255, 255));
-        btnPayment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Card Payment_1.png"))); // NOI18N
+        btnPayment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Card_Payment.png"))); // NOI18N
         btnPayment.setText("Thanh toán");
         btnPayment.setBorder(null);
+        buttonGroupDashboard.add(btnPayment);
         btnPayment.setFocusPainted(false);
         btnPayment.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         panelPayment.add(btnPayment, java.awt.BorderLayout.CENTER);
@@ -190,6 +190,7 @@ public class DashboardView extends javax.swing.JFrame {
         btnStatistical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Graph Report Script.png"))); // NOI18N
         btnStatistical.setText("Thống kê");
         btnStatistical.setBorder(null);
+        buttonGroupDashboard.add(btnStatistical);
         btnStatistical.setFocusPainted(false);
         btnStatistical.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         panelStatistical.add(btnStatistical, java.awt.BorderLayout.CENTER);
@@ -224,9 +225,10 @@ public class DashboardView extends javax.swing.JFrame {
         btnPersonInfor.setBackground(new java.awt.Color(175, 17, 23));
         btnPersonInfor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPersonInfor.setForeground(new java.awt.Color(255, 255, 255));
-        btnPersonInfor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Customer_1.png"))); // NOI18N
+        btnPersonInfor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Customer.png"))); // NOI18N
         btnPersonInfor.setText("Thông tin cá nhân");
         btnPersonInfor.setBorder(null);
+        buttonGroupDashboard.add(btnPersonInfor);
         btnPersonInfor.setFocusPainted(false);
         btnPersonInfor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         panelnforPerson.add(btnPersonInfor, java.awt.BorderLayout.CENTER);
@@ -263,12 +265,8 @@ public class DashboardView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        panelScreen.setMaximumSize(new java.awt.Dimension(800, 600));
         panelScreen.setLayout(new java.awt.CardLayout());
-        panelScreen.add(roomMapPanel1, "card3");
-        panelScreen.add(roomManagePanel1, "card2");
-        panelScreen.add(paymentPanel1, "card5");
-        panelScreen.add(statisticalPanel1, "card6");
-        panelScreen.add(inforPersonPanel1, "card4");
 
         jPanel2.setBackground(new java.awt.Color(248, 138, 7));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -284,7 +282,7 @@ public class DashboardView extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 760, Short.MAX_VALUE)
                 .addComponent(btnClose))
         );
         jPanel2Layout.setVerticalGroup(
@@ -300,9 +298,7 @@ public class DashboardView extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(panelScreen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(panelScreen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,7 +306,7 @@ public class DashboardView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -343,6 +339,19 @@ public class DashboardView extends javax.swing.JFrame {
     public void setBtnCloseAct(ActionListener listener) {
         btnClose.addActionListener(listener);
     }
+    
+    public void addPanelToPanelScreen(JPanel jPanel, String namePanel) {
+        panelScreen.add(jPanel,namePanel);
+    }
+    
+    public JPanel getPanelScreen() {
+        return panelScreen;
+    }
+    
+//    public String getNamePanelRoomMap() {
+//        return ""
+//    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -383,7 +392,7 @@ public class DashboardView extends javax.swing.JFrame {
     public javax.swing.JButton btnRoomManage;
     public javax.swing.JButton btnRoomMap;
     public javax.swing.JButton btnStatistical;
-    public com.mycompany.view.InforPersonPanel inforPersonPanel1;
+    private javax.swing.ButtonGroup buttonGroupDashboard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -399,9 +408,5 @@ public class DashboardView extends javax.swing.JFrame {
     public javax.swing.JPanel panelScreen;
     public javax.swing.JPanel panelStatistical;
     public javax.swing.JPanel panelnforPerson;
-    public com.mycompany.view.PaymentPanel paymentPanel1;
-    public com.mycompany.view.RoomManagePanel roomManagePanel1;
-    public com.mycompany.view.RoomMapPanel roomMapPanel1;
-    public com.mycompany.view.StatisticalPanel statisticalPanel1;
     // End of variables declaration//GEN-END:variables
 }

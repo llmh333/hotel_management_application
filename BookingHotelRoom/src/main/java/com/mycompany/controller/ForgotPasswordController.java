@@ -4,8 +4,7 @@
  */
 package com.mycompany.controller;
 
-import com.mycompany.dao.UserDAO;
-import com.mycompany.model.User;
+
 import com.mycompany.request.ForgotPasswordRequest;
 import com.mycompany.respone.OTPCodeRespone;
 import com.mycompany.service.IEmail;
@@ -16,17 +15,10 @@ import com.mycompany.service.Iplm.OTPServiceIplm;
 import com.mycompany.service.Iplm.UserServiceIplm;
 import com.mycompany.common.PasswordEncryption;
 import com.mycompany.view.ForgotPasswordView;
-import com.mycompany.view.SigninView;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
+
 
 /**
  *
@@ -108,79 +100,5 @@ public class ForgotPasswordController {
         }
         
     }
-//    private void sendOTP() {
-//        String receivedEmail = forgotPasswordView.txtReceivedEmail.getText();
-//        try {
-//            EntityManager entityManager = HibernateUtil.getEntityManager();
-//            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE email = :email",User.class);
-//            query.setParameter("email", receivedEmail);
-//            User u = query.getSingleResult();
-//            System.out.println(u.toString());
-//
-//            if (receivedEmail.isBlank()) {
-//                JOptionPane.showMessageDialog(forgotPasswordView, "Vui lòng điền email");
-//            } else {
-//                otp = OTPServiceIplm.genarateOTP();
-//                Timer timer = new Timer(1000, new ActionListener() {
-//                int countdown = 60;
-//
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    forgotPasswordView.btnGetCode.setEnabled(false);
-//                    forgotPasswordView.btnGetCode.setText(countdown + " giây");
-//                    countdown--;
-//                    if (countdown < 0) {
-//                        ((Timer) e.getSource()).stop(); // Dừng Timer khi countdown = 0
-//                        forgotPasswordView.btnGetCode.setText("Lấy mã");
-//                        forgotPasswordView.btnGetCode.setEnabled(true);
-//                    }
-//                }
-//            });
-//            timer.start();
-//                EmailServiceIplm.sendEmail(otp, receivedEmail);
-//                forgotPasswordView.labelNotifi.setText("Mã xác thực đã được gửi đến email của bạn !");
-//            }
-//        } catch (NoResultException e) {
-//            JOptionPane.showMessageDialog(forgotPasswordView, "Không tồn tại email này trên hệ thống");
-//        }
-//        
-//    }
-    
-//    private void confirmOTP() {
-//        int check;
-//        String currentOTP = forgotPasswordView.txtOTPCode.getText();
-//        String newPassword = forgotPasswordView.txtNewPassword.getText();
-//        String email = forgotPasswordView.txtReceivedEmail.getText();
-//        if (currentOTP.isBlank() || newPassword.isBlank() || email.isBlank()) {
-//            JOptionPane.showMessageDialog(forgotPasswordView, "Vui lòng điền đầy đủ thông tin !!!");
-//        } else {
-//            check = OTPServiceIplm.checkOTP(currentOTP);
-//             if (check == 0) {
-//                String encrypPassword = UserDAO.hashPassword(forgotPasswordView.txtNewPassword.getText());
-//                EntityManager entityManager = HibernateUtil.getEntityManager();
-//                Query query = entityManager.createQuery("UPDATE User SET password = :newPassword WHERE email = :email");
-//                query.setParameter("newPassword", encrypPassword);
-//                query.setParameter("email", email);
-//                entityManager.getTransaction().begin();
-//                query.executeUpdate();                 
-//                entityManager.getTransaction().commit();
-//                forgotPasswordView.txtNewPassword.setText("");
-//                forgotPasswordView.txtOTPCode.setText("");
-//                forgotPasswordView.txtReceivedEmail.setText("");
-//                JOptionPane.showMessageDialog(forgotPasswordView, "Mã OTP đúng, đổi mật khẩu thành công");
-//                
-//
-//             } 
-//             if (check == 1) {
-//                JOptionPane.showMessageDialog(forgotPasswordView, "Mã OTP đã hết hạn");
-//             }
-//             if (check == 2) {
-//                JOptionPane.showMessageDialog(forgotPasswordView, "Mã OTP không tồn tại");
-//             }
-//        }
-//    }
-//    private void backForgotPassword() {
-//        forgotPasswordView.dispose();
-//    }
 }
 

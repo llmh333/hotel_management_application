@@ -17,11 +17,14 @@ public interface IUserService {
     
     public UserRespone login(LoginRequest loginRequest);
     
-    public boolean register(RegisterRequest registerRequest);
+    public int register(RegisterRequest registerRequest);
     
     public UserRespone convertToRespone(User user);
     
     public User convertToUser(RegisterRequest registerRequest);
     
     public boolean changePassword(String password, String email);
+
+    public int checkUserExists(RegisterRequest registerRequest);
+
 }

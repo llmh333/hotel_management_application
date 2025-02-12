@@ -4,29 +4,126 @@
  */
 package com.mycompany.controller;
 
+import com.mycompany.common.InfoRoom;
+import com.mycompany.model.Room;
+import com.mycompany.service.IRoomService;
+import com.mycompany.service.Iplm.RoomServiceIplm;
+import com.mycompany.util.HibernateUtil;
 import com.mycompany.view.DashboardView;
+import com.mycompany.view.FormRoomPanel;
+import com.mycompany.view.InforPersonPanel;
+import com.mycompany.view.PaymentPanel;
+import com.mycompany.view.RoomManagePanel;
+import com.mycompany.view.RoomMapPanel;
+import com.mycompany.view.StatisticalPanel;
+import jakarta.persistence.EntityManager;
+import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JPanel;
 
 /**
  *
  * @author lminh
  */
 public class DashboardController {
-    private final Color yellowcColor = new Color(248,148,7);
     private final Color redColor = new Color(175,17,23);
     private final Color darkRedColor = new Color(140,17,23);
+    private IRoomService roomService = new RoomServiceIplm();
     private DashboardView dashboardView;
     public DashboardController(DashboardView dashboardView) {
         this.dashboardView = dashboardView;
-        this.dashboardView.setBtnCloseAct(e -> closeApp());
-        this.dashboardView.setBtnRoomMapAct(e -> screenRoomMap());
-        this.dashboardView.setBtnRoomManage(e -> screenRoomManage());
-        this.dashboardView.setBtnPayment(e -> screenPayment());
-        this.dashboardView.setBtnStatistical(e -> screenStatistical());
-        this.dashboardView.setBtnPersonInfor(e -> screenPersonInfor());
+        initDashboardView();
     }
+    
+    public void showDashBoardView(RoomMapPanel roomMapPanel) {
+        List<Room> rooms = roomService.getAllRoom();
+        int roomAvail = 0, roomNotAvail = 0, roomBusy = 0;
+        for (Room room : rooms) {
+            FormRoomPanel formRoomPanel = new FormRoomPanel();
+            if (room.getStatus().equals(InfoRoom.STATUS_NOT_AVAILABEL)) {
+                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.redStatus);
+                roomNotAvail++;
+            }
+            if (room.getStatus().equals(InfoRoom.STATUS_AVAILABEL)) {
+                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.greenStatus);
+                roomAvail++;
+            }
+            if (room.getStatus().equals(InfoRoom.STATUS_BUSY)) {
+                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.navyStatus);
+                roomBusy++;
+            }
+            formRoomPanel.setLabelRoomType(room.getRoomType());
+            formRoomPanel.setLabelRoomNumber(room.getRoomNumber());
+            formRoomPanel.setLabelRoomQuantity(room.getQuantity());
+            formRoomPanel.setLabelRoomStatus(room.getStatus());
+            roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
+            roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
+            roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));
+            roomMapPanel.addFormRoomPanel(formRoomPanel);
+            
+        }
+        dashboardView.addPanelToPanelScreen(roomMapPanel, "RoomMapPanel");
+        showPanel("RoomMapPanel");
+    }
+    
+    public void initDashboardView() {
+        showDashBoardView(new RoomMapPanel());
+        this.dashboardView.addPanelToPanelScreen(new RoomManagePanel(), "RoomManagePanel");
+        this.dashboardView.addPanelToPanelScreen(new PaymentPanel(), "PaymentPanel");
+        this.dashboardView.addPanelToPanelScreen(new StatisticalPanel(), "StatisticalPanel");
+        this.dashboardView.addPanelToPanelScreen(new InforPersonPanel(), "InforPersonPanel");
+
+        this.dashboardView.setBtnCloseAct(new closeApp());
+        this.dashboardView.setBtnRoomMapAct(new swapScreen());
+        this.dashboardView.setBtnRoomManage(new swapScreen());
+        this.dashboardView.setBtnPayment(new swapScreen());
+        this.dashboardView.setBtnStatistical(new swapScreen());
+        this.dashboardView.setBtnPersonInfor(new swapScreen());
+    }
+    public void showPanel(String namePanel) {
+            CardLayout cardLayout = (CardLayout) dashboardView.getPanelScreen().getLayout();
+            cardLayout.show(dashboardView.getPanelScreen(), namePanel);
+        }
+    private class swapScreen implements ActionListener {
+        
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String act = e.getActionCommand();
+            if (act.equals("Sơ đồ phòng")) {
+                screenRoomMap();
+                RoomMapController roomMapController = new RoomMapController(new RoomMapPanel());
+                RoomMapPanel roomMapPanel = roomMapController.getRoomMapPanel();
+                dashboardView.addPanelToPanelScreen(roomMapPanel, "RoomMapPanel");
+                showPanel("RoomMapPanel");
+            }
+            if (act.equals("Quản lý phòng")) {
+                RoomMapManageController roomMapManageController = new RoomMapManageController(new RoomManagePanel());
+                RoomManagePanel roomManagePanel = roomMapManageController.getRoomManagePanel();
+                screenRoomManage();
+                dashboardView.addPanelToPanelScreen(roomManagePanel, "RoomManagePanel");
+                showPanel("RoomManagePanel");
+            }
+            if (act.equals("Thanh toán")) {
+                screenPayment();
+                showPanel("PaymentPanel");
+            }
+            if (act.equals("Thống kê")) {
+                screenStatistical();
+                showPanel("StatisticalPanel");
+            }
+            if (act.equals("Thông tin cá nhân")) {
+                screenPersonInfor();
+                showPanel("InforPersonPanel");
+            }
+        }
+        
+        
+    }
+    
     
     private void screenRoomMap() {
         dashboardView.btnRoomMap.setBackground(darkRedColor);         
@@ -41,11 +138,6 @@ public class DashboardController {
         dashboardView.panelBorderStatis.setVisible(false);
         dashboardView.panelBorderInforPerson.setVisible(false);        
 
-        dashboardView.roomMapPanel1.setVisible(true);
-        dashboardView.roomManagePanel1.setVisible(false); 
-        dashboardView.paymentPanel1.setVisible(false);
-        dashboardView.statisticalPanel1.setVisible(false);
-        dashboardView.inforPersonPanel1.setVisible(false);
         
     }
     
@@ -62,11 +154,6 @@ public class DashboardController {
         dashboardView.panelBorderStatis.setVisible(false);
         dashboardView.panelBorderInforPerson.setVisible(false);
 
-        dashboardView.roomMapPanel1.setVisible(false);
-        dashboardView.roomManagePanel1.setVisible(true); 
-        dashboardView.paymentPanel1.setVisible(false);
-        dashboardView.statisticalPanel1.setVisible(false);
-        dashboardView.inforPersonPanel1.setVisible(false);
     }
     
     private void screenPayment() {
@@ -82,11 +169,6 @@ public class DashboardController {
         dashboardView.panelBorderStatis.setVisible(false);
         dashboardView.panelBorderInforPerson.setVisible(false);
 
-        dashboardView.roomMapPanel1.setVisible(false);
-        dashboardView.roomManagePanel1.setVisible(false); 
-        dashboardView.paymentPanel1.setVisible(true);
-        dashboardView.statisticalPanel1.setVisible(false);
-        dashboardView.inforPersonPanel1.setVisible(false);
     }
     
     private void screenStatistical() {
@@ -102,11 +184,6 @@ public class DashboardController {
         dashboardView.panelBorderStatis.setVisible(true);
         dashboardView.panelBorderInforPerson.setVisible(false);
 
-        dashboardView.roomMapPanel1.setVisible(false);
-        dashboardView.roomManagePanel1.setVisible(false); 
-        dashboardView.paymentPanel1.setVisible(false);
-        dashboardView.statisticalPanel1.setVisible(true);
-        dashboardView.inforPersonPanel1.setVisible(false);
     }
     
     private void screenPersonInfor() {
@@ -121,16 +198,14 @@ public class DashboardController {
         dashboardView.panelBorderPayment.setVisible(false);
         dashboardView.panelBorderStatis.setVisible(false);
         dashboardView.panelBorderInforPerson.setVisible(true);
-
-        dashboardView.roomMapPanel1.setVisible(false);
-        dashboardView.roomManagePanel1.setVisible(false); 
-        dashboardView.paymentPanel1.setVisible(false);
-        dashboardView.statisticalPanel1.setVisible(false);
-        dashboardView.inforPersonPanel1.setVisible(true);
     }
     
-    private void closeApp() {
-        System.exit(0);
+    private class closeApp implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
     }
     
 }
