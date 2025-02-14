@@ -4,7 +4,11 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.model.Room;
 import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -63,14 +67,23 @@ public class RoomManagePanel extends javax.swing.JPanel {
                 "Số phòng", "Loại phòng", "Kiểu phòng", "Trạng thái"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tableListRoom.setShowGrid(false);
+        tableListRoom.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tableListRoom);
         if (tableListRoom.getColumnModel().getColumnCount() > 0) {
             tableListRoom.getColumnModel().getColumn(0).setMinWidth(70);
@@ -258,6 +271,29 @@ public class RoomManagePanel extends javax.swing.JPanel {
     
     public String getRoomStatus() {
         return (String) boxRoomStatus.getSelectedItem();
+    }
+    
+    public void setDataTableListRoom(List<Room> listRoom) {
+        DefaultTableModel model = (DefaultTableModel) this.tableListRoom.getModel();
+        model.setRowCount(0);
+        for(int i = 0 ; i < listRoom.size(); i++) {
+            model.addRow(new Object[] {
+                    listRoom.get(i).getRoomNumber(),
+                    listRoom.get(i).getRoomType(),
+                    listRoom.get(i).getQuantity(),
+                    listRoom.get(i).getStatus()
+            }); 
+        }
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        
+        for (int i = 0; i < tableListRoom.getColumnCount(); i++) {
+            tableListRoom.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+    
+    public String getRoomSelect() {
+        return (String) tableListRoom.getValueAt(tableListRoom.getSelectedRow(), 0);
     }
     
     public void setBtnAddRoom(ActionListener listener) {

@@ -6,7 +6,7 @@ D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\MailConfig.j
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\PasswordEncryption.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\Validator.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\AuthController.java
-D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ChangeInforRoomController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ChangeInfoRoomController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\DashboardController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ForgotPasswordController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\RoomMapController.java

@@ -33,30 +33,38 @@ public class RoomMapController {
     public void initRoomMapPanel() {
         List<Room> rooms = roomService.getAllRoom();
         int roomAvail = 0, roomNotAvail = 0, roomBusy = 0;
-        for (Room room : rooms) {
-            FormRoomPanel formRoomPanel = new FormRoomPanel();
-            if (room.getStatus().equals(InfoRoom.STATUS_NOT_AVAILABEL)) {
-                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.redStatus);
-                roomNotAvail++;
+        if (!rooms.isEmpty()) {
+            roomMapPanel.deleteFormRoomPanel();
+            for (Room room : rooms) {
+                FormRoomPanel formRoomPanel = new FormRoomPanel();
+                if (room.getStatus().equals(InfoRoom.STATUS_NOT_AVAILABEL)) {
+                    formRoomPanel.setBgrPanelStatusRoom(InfoRoom.redStatus);
+                    roomNotAvail++;
+                }
+                if (room.getStatus().equals(InfoRoom.STATUS_AVAILABEL)) {
+                    formRoomPanel.setBgrPanelStatusRoom(InfoRoom.greenStatus);
+                    roomAvail++;
+                }
+                if (room.getStatus().equals(InfoRoom.STATUS_BUSY)) {
+                    formRoomPanel.setBgrPanelStatusRoom(InfoRoom.navyStatus);
+                    roomBusy++;
+                }
+                formRoomPanel.setLabelRoomType(room.getRoomType());
+                formRoomPanel.setLabelRoomNumber(room.getRoomNumber());
+                formRoomPanel.setLabelRoomQuantity(room.getQuantity());
+                formRoomPanel.setLabelRoomStatus(room.getStatus());
+                roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
+                roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
+                roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));
+                roomMapPanel.addFormRoomPanel(formRoomPanel);    
             }
-            if (room.getStatus().equals(InfoRoom.STATUS_AVAILABEL)) {
-                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.greenStatus);
-                roomAvail++;
-            }
-            if (room.getStatus().equals(InfoRoom.STATUS_BUSY)) {
-                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.navyStatus);
-                roomBusy++;
-            }
-            formRoomPanel.setLabelRoomType(room.getRoomType());
-            formRoomPanel.setLabelRoomNumber(room.getRoomNumber());
-            formRoomPanel.setLabelRoomQuantity(room.getQuantity());
-            formRoomPanel.setLabelRoomStatus(room.getStatus());
+        } else {
+            System.out.println("hello");
             roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
             roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
             roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));
-            roomMapPanel.addFormRoomPanel(formRoomPanel);
-            
         }
+        
     }
     public void showRoomMap() {
         roomMapPanel.setVisible(true);

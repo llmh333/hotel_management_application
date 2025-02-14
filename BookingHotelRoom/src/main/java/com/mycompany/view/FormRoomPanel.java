@@ -69,6 +69,8 @@ public class FormRoomPanel extends javax.swing.JPanel {
         jPopupMenu1.add(menuItemRoomDetails);
 
         setBackground(new java.awt.Color(204, 204, 204));
+        setMaximumSize(new java.awt.Dimension(150, 150));
+        setMinimumSize(new java.awt.Dimension(150, 150));
         setPreferredSize(new java.awt.Dimension(150, 150));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -79,7 +81,7 @@ public class FormRoomPanel extends javax.swing.JPanel {
 
         labelRoomNumber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelRoomNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelRoomNumber.setText("Phòng 101");
+        labelRoomNumber.setText("Phòng 101 (Ví dụ)");
         add(labelRoomNumber, java.awt.BorderLayout.PAGE_START);
 
         panelStatusRoom.setBackground(new java.awt.Color(255, 255, 255));

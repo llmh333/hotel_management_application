@@ -4,6 +4,7 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.common.InfoRoom;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -19,6 +20,7 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
      */
     public ChangeInfoRoom() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -34,7 +36,6 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
         boxRoomType = new javax.swing.JComboBox<>();
         txtRoomNumber = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        txtRoomFeature = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
@@ -42,18 +43,20 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
         btnConfirm = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         boxRoomQuantity = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtRoomFeature = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         boxRoomType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         boxRoomType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VIP", "Thường" }));
 
+        txtRoomNumber.setEditable(false);
         txtRoomNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Số phòng");
-
-        txtRoomFeature.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Số người");
@@ -77,41 +80,46 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
         boxRoomQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         boxRoomQuantity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đơn", "Đôi", "Ba", " " }));
 
+        txtRoomFeature.setColumns(2);
+        txtRoomFeature.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtRoomFeature.setLineWrap(true);
+        txtRoomFeature.setRows(5);
+        jScrollPane1.setViewportView(txtRoomFeature);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnConfirm)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5))
-                            .addGap(24, 24, 24)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(boxRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(boxRoomQuantity, 0, 86, Short.MAX_VALUE))
-                                .addComponent(txtRoomFeature)
-                                .addComponent(txtPrice)
-                                .addComponent(txtRoomNumber)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnConfirm)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(boxRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(boxRoomQuantity, 0, 86, Short.MAX_VALUE))
+                            .addComponent(txtPrice)
+                            .addComponent(txtRoomNumber)
+                            .addComponent(jScrollPane1))))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtRoomNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtRoomNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -119,13 +127,13 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(boxRoomQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(txtRoomFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
@@ -164,6 +172,40 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
     public String getRoomFeature() {
         return txtRoomFeature.getText();
     }
+    
+    public void setRoomNumber(String roomNumber) {
+        txtRoomNumber.setText(roomNumber);
+    }
+    
+    public void setRoomType(String roomType) {
+        if (roomType.equals(InfoRoom.VIP)) {
+            boxRoomType.setSelectedIndex(1);
+        } else {
+            boxRoomType.setSelectedIndex(2);
+        }
+    }
+    
+    public void setRoomQuantity(String roomQuantity) {
+        if (roomQuantity.equals(InfoRoom.PHONG_DON)) {
+            boxRoomQuantity.setSelectedIndex(0);
+        } 
+        else if (roomQuantity.equals(InfoRoom.PHONG_DOI)) {
+            boxRoomQuantity.setSelectedIndex(1);
+
+        }
+        else if (roomQuantity.equals(InfoRoom.PHONG_BA)) {
+            boxRoomQuantity.setSelectedIndex(2);
+
+        }
+    }
+    
+    public void setRoomPrice(String roomPrice) {
+        txtPrice.setText(roomPrice);
+    }
+    
+    public void setRoomFeature(String roomFeature) {
+        txtRoomFeature.setText(roomFeature);
+    } 
     
     public void setBtnConFirmAct(ActionListener listener) {
         btnConfirm.addActionListener(listener);
@@ -220,8 +262,9 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtRoomFeature;
+    private javax.swing.JTextArea txtRoomFeature;
     private javax.swing.JTextField txtRoomNumber;
     // End of variables declaration//GEN-END:variables
 }

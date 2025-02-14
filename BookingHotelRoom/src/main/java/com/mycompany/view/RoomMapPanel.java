@@ -21,6 +21,10 @@ public class RoomMapPanel extends javax.swing.JPanel {
 //        jScrollPane1.add(new FormRoomPanel());
     }
     
+    public void deleteFormRoomPanel() {
+        panelSonListRoom.remove(formRoomPanelSample);
+    }
+    
     public void addFormRoomPanel(JPanel jPanel) {
         panelSonListRoom.add(jPanel);
     }
@@ -49,6 +53,7 @@ public class RoomMapPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         panelShowListRoom = new javax.swing.JPanel();
         panelSonListRoom = new javax.swing.JPanel();
+        formRoomPanelSample = new com.mycompany.view.FormRoomPanel();
         panelTotlaRoom = new javax.swing.JPanel();
         panelTotalRoomAvail = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -73,6 +78,8 @@ public class RoomMapPanel extends javax.swing.JPanel {
         panelShowListRoom.setLayout(flowLayout1);
 
         panelSonListRoom.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
+        panelSonListRoom.add(formRoomPanelSample);
+
         panelShowListRoom.add(panelSonListRoom);
 
         jScrollPane1.setViewportView(panelShowListRoom);
@@ -194,6 +201,7 @@ public class RoomMapPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.mycompany.view.FormRoomPanel formRoomPanelSample;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

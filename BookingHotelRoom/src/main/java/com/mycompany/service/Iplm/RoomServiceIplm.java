@@ -11,6 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -40,7 +41,14 @@ public class RoomServiceIplm implements IRoomService{
     }
 
     @Override
-    public boolean changeInfoRoom(String roomNumber) {
+    public boolean changeInfoRoom(Room room) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(room);
+            entityManager.getTransaction().commit();
+            
+        } catch (Exception e) {
+        }
         return true;
     }
 
@@ -48,7 +56,7 @@ public class RoomServiceIplm implements IRoomService{
     public boolean deleteRoom(String roomNumber) {
         try {
             Query query = entityManager.createQuery("DELETE FROM Room WHERE roomNumber = :roomNumber");
-            query.setParameter("roomNu,ber", roomNumber);
+            query.setParameter("roomNumber", roomNumber);
             entityManager.getTransaction().begin();
             int row = query.executeUpdate();
             entityManager.getTransaction().commit();
@@ -66,12 +74,26 @@ public class RoomServiceIplm implements IRoomService{
             List<Room> rooms = new ArrayList<Room>();
             TypedQuery<Room> query = entityManager.createQuery("FROM Room",Room.class);
             rooms = query.getResultList();
+            System.out.println(rooms);
+            rooms.sort(Comparator.comparing(Room::getRoomNumber));
             return rooms;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
         
+    }
+
+    @Override
+    public Room findRoomByRoomNumber(String roomNumber) {
+        try {
+            TypedQuery<Room> query = entityManager.createQuery("FROM Room WHERE roomNumber = :roomNumber",Room.class);
+            query.setParameter("roomNumber", roomNumber);
+            Room room = query.getSingleResult();
+            return room;
+        } catch (Exception e) {
+        }
+        return null;
     }
     
 }

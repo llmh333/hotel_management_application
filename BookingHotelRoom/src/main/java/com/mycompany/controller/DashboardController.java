@@ -37,40 +37,12 @@ public class DashboardController {
         this.dashboardView = dashboardView;
         initDashboardView();
     }
-    
-    public void showDashBoardView(RoomMapPanel roomMapPanel) {
-        List<Room> rooms = roomService.getAllRoom();
-        int roomAvail = 0, roomNotAvail = 0, roomBusy = 0;
-        for (Room room : rooms) {
-            FormRoomPanel formRoomPanel = new FormRoomPanel();
-            if (room.getStatus().equals(InfoRoom.STATUS_NOT_AVAILABEL)) {
-                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.redStatus);
-                roomNotAvail++;
-            }
-            if (room.getStatus().equals(InfoRoom.STATUS_AVAILABEL)) {
-                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.greenStatus);
-                roomAvail++;
-            }
-            if (room.getStatus().equals(InfoRoom.STATUS_BUSY)) {
-                formRoomPanel.setBgrPanelStatusRoom(InfoRoom.navyStatus);
-                roomBusy++;
-            }
-            formRoomPanel.setLabelRoomType(room.getRoomType());
-            formRoomPanel.setLabelRoomNumber(room.getRoomNumber());
-            formRoomPanel.setLabelRoomQuantity(room.getQuantity());
-            formRoomPanel.setLabelRoomStatus(room.getStatus());
-            roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
-            roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
-            roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));
-            roomMapPanel.addFormRoomPanel(formRoomPanel);
-            
-        }
-        dashboardView.addPanelToPanelScreen(roomMapPanel, "RoomMapPanel");
-        showPanel("RoomMapPanel");
-    }
-    
+           
     public void initDashboardView() {
-        showDashBoardView(new RoomMapPanel());
+//        showDashBoardView(new RoomMapPanel());
+        RoomMapPanel roomMapPanel = new RoomMapPanel();
+        RoomMapController roomMapController = new RoomMapController(roomMapPanel);
+        this.dashboardView.addPanelToPanelScreen(roomMapController.getRoomMapPanel(), "RoomMap");
         this.dashboardView.addPanelToPanelScreen(new RoomManagePanel(), "RoomManagePanel");
         this.dashboardView.addPanelToPanelScreen(new PaymentPanel(), "PaymentPanel");
         this.dashboardView.addPanelToPanelScreen(new StatisticalPanel(), "StatisticalPanel");
