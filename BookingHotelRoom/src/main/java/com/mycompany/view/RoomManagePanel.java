@@ -149,7 +149,7 @@ public class RoomManagePanel extends javax.swing.JPanel {
         jLabel6.setText("Trạng thái");
 
         boxRoomStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        boxRoomStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ĐANG THUÊ", "ĐANG TRỐNG", "ĐANG BẬN" }));
+        boxRoomStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ĐANG TRỐNG", "ĐANG BẬN", "ĐANG THUÊ" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

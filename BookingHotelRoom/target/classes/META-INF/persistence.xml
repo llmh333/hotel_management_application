@@ -7,12 +7,15 @@
     <persistence-unit name="application-unit">
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/bookinghotelroom?createDatabaseIfNotExist=true" />
-            <property name="hibernate.connection.username" value="root" />
-            <property name="hibernate.connection.password" value="admin" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://103.18.6.49/heb8q7ulfpy6_hotelmanage?createDatabaseIfNotExist=true" />
+            <property name="hibernate.connection.username" value="heb8q7ulfpy6_admin" />
+            <property name="hibernate.connection.password" value="lehieu283" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+            <property name="hibernate.connection.useUnicode" value="true"/>
+            <property name="hibernate.connection.CharSet" value="utf8"/>
         </properties>
     </persistence-unit>
 </persistence>

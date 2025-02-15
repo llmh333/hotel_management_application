@@ -13,9 +13,9 @@
             <Property name="text" type="java.lang.String" value="&#x110;&#x1eb7;t ph&#xf2;ng"/>
           </Properties>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="menuItemPayment">
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemInfor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
+            <Property name="text" type="java.lang.String" value="Chi ti&#x1ebf;t ph&#xf2;ng"/>
           </Properties>
         </MenuItem>
       </SubComponents>

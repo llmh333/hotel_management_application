@@ -42,7 +42,7 @@ public class FormRoomPanel extends javax.swing.JPanel {
             menuItemBookRoom.setEnabled(enable);
         }
         else {
-            menuItemPayment.setEnabled(enable);
+            menuItemInfor.setEnabled(enable);
         }
     }
     
@@ -68,7 +68,7 @@ public class FormRoomPanel extends javax.swing.JPanel {
 
         popupMenu = new javax.swing.JPopupMenu();
         menuItemBookRoom = new javax.swing.JMenuItem();
-        menuItemPayment = new javax.swing.JMenuItem();
+        menuItemInfor = new javax.swing.JMenuItem();
         labelRoomNumber = new javax.swing.JLabel();
         panelStatusRoom = new javax.swing.JPanel();
         labelRoomType = new javax.swing.JLabel();
@@ -78,8 +78,8 @@ public class FormRoomPanel extends javax.swing.JPanel {
         menuItemBookRoom.setText("Đặt phòng");
         popupMenu.add(menuItemBookRoom);
 
-        menuItemPayment.setText("Thanh toán");
-        popupMenu.add(menuItemPayment);
+        menuItemInfor.setText("Chi tiết phòng");
+        popupMenu.add(menuItemInfor);
 
         setBackground(new java.awt.Color(204, 204, 255));
         setMaximumSize(new java.awt.Dimension(150, 150));
@@ -128,7 +128,7 @@ public class FormRoomPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labelRoomStatus;
     private javax.swing.JLabel labelRoomType;
     private javax.swing.JMenuItem menuItemBookRoom;
-    private javax.swing.JMenuItem menuItemPayment;
+    private javax.swing.JMenuItem menuItemInfor;
     public javax.swing.JPanel panelStatusRoom;
     private javax.swing.JPopupMenu popupMenu;
     // End of variables declaration//GEN-END:variables
