@@ -6,9 +6,11 @@ D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\MailConfig.j
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\PasswordEncryption.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\Validator.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\AuthController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\BookingRoomController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ChangeInfoRoomController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\DashboardController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ForgotPasswordController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\FormRoomPanelController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\RoomMapController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\RoomMapManageController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\dao\UserDAO.java
@@ -23,9 +25,12 @@ D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\request\RegisterReq
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\respone\OTPCodeRespone.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\respone\UserRespone.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\IBill.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\IBookingSerive.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\ICustomer.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\IEmail.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\IOTPService.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\Iplm\BookingServiceIplm.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\Iplm\CustomerIplm.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\Iplm\EmailServiceIplm.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\Iplm\OTPServiceIplm.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\Iplm\RoomServiceIplm.java
@@ -33,6 +38,7 @@ D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\Iplm\UserSe
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\IRoomService.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\service\IUserService.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\util\HibernateUtil.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\BookingRoom.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\ChangeInfoRoom.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\DashboardView.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\ForgotPasswordView.java

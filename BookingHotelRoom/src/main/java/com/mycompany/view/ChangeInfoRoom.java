@@ -46,7 +46,7 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtRoomFeature = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         boxRoomType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -78,7 +78,7 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
         jLabel2.setText("Loại phòng");
 
         boxRoomQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        boxRoomQuantity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đơn", "Đôi", "Ba", " " }));
+        boxRoomQuantity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đơn", "Đôi", "Ba" }));
 
         txtRoomFeature.setColumns(2);
         txtRoomFeature.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -179,9 +179,9 @@ public class ChangeInfoRoom extends javax.swing.JFrame {
     
     public void setRoomType(String roomType) {
         if (roomType.equals(InfoRoom.VIP)) {
-            boxRoomType.setSelectedIndex(1);
+            boxRoomType.setSelectedIndex(0);
         } else {
-            boxRoomType.setSelectedIndex(2);
+            boxRoomType.setSelectedIndex(1);
         }
     }
     

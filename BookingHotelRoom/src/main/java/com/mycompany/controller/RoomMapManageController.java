@@ -5,6 +5,7 @@
 package com.mycompany.controller;
 
 import com.mycompany.model.Room;
+import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
 import com.mycompany.service.Iplm.RoomServiceIplm;
 import com.mycompany.util.HibernateUtil;
@@ -25,7 +26,9 @@ public class RoomMapManageController {
     private RoomManagePanel roomManagePanel;
     public IRoomService roomService = new RoomServiceIplm();
     public EntityManager entityManager = HibernateUtil.getEntityManager();
-    public RoomMapManageController(RoomManagePanel roomManagePanel) {
+    private User user;
+    
+    public RoomMapManageController(RoomManagePanel roomManagePanel, User user) {
         this.roomManagePanel = roomManagePanel;
         initRoomManage();
     }
@@ -74,7 +77,7 @@ public class RoomMapManageController {
         @Override
         public void actionPerformed(ActionEvent e) {
             Room room = roomService.findRoomByRoomNumber(roomManagePanel.getRoomSelect());
-            ChangeInfoRoomController changeInfoRoomController = new ChangeInfoRoomController(new ChangeInfoRoom() ,roomService,room);
+            ChangeInfoRoomController changeInfoRoomController = new ChangeInfoRoomController(new ChangeInfoRoom(), roomService, roomManagePanel,room);
             showListRoom();
         }
         
@@ -87,6 +90,7 @@ public class RoomMapManageController {
             int ansConfirm = JOptionPane.showConfirmDialog(roomManagePanel, "Xác nhận xóa phòng đã chọn", "Xóa phòng", JOptionPane.OK_CANCEL_OPTION);
             if (ansConfirm == 0) {
                 String roomNumber = roomManagePanel.getRoomSelect();
+                System.out.println(roomNumber);
                 if (roomService.deleteRoom(roomNumber)) {
                     JOptionPane.showMessageDialog(roomManagePanel, "Xóa phòng thành công");
                     showListRoom();

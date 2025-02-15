@@ -6,6 +6,7 @@ package com.mycompany.controller;
 
 import com.mycompany.common.ExitCodeConfig;
 import com.mycompany.common.Validator;
+import com.mycompany.model.User;
 import com.mycompany.request.LoginRequest;
 import com.mycompany.request.RegisterRequest;
 import com.mycompany.respone.UserRespone;
@@ -76,11 +77,13 @@ public final class AuthController {
         @Override
         public void actionPerformed(ActionEvent e) {
             LoginRequest loginRequest = signinView.getLoginRequest();
-            UserRespone userRespone = userService.login(loginRequest);
-            if (userRespone != null) {
+            User user = userService.login(loginRequest);
+            if (user != null) {
                 JOptionPane.showMessageDialog(signinView, "Đăng nhập thành công");
+                System.out.println(user.getId());
+
                 DashboardView dashboardView = new DashboardView();
-                DashboardController dashboardController = new DashboardController(dashboardView);
+                DashboardController dashboardController = new DashboardController(dashboardView, user);
                 if (signinView != null) {
                     signinView.dispose();
                 }

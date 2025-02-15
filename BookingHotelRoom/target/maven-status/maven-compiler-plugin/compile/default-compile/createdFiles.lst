@@ -9,10 +9,13 @@ com\mycompany\model\User.class
 com\mycompany\view\RoomManagePanel$3.class
 com\mycompany\view\SignupView.class
 com\mycompany\respone\UserRespone$UserResponeBuilder.class
+com\mycompany\service\Iplm\BookingServiceIplm.class
 com\mycompany\view\ForgotPasswordView.class
 com\mycompany\service\Iplm\OTPServiceIplm.class
 com\mycompany\view\SignupView$2.class
+com\mycompany\view\BookingRoom$1.class
 com\mycompany\controller\DashboardController.class
+com\mycompany\view\BookingRoom.class
 com\mycompany\util\HibernateUtil.class
 com\mycompany\view\StatisticalPanel.class
 com\mycompany\service\IUserService.class
@@ -30,6 +33,7 @@ com\mycompany\view\SigninView$3.class
 com\mycompany\request\RegisterRequest.class
 com\mycompany\common\PasswordEncryption.class
 com\mycompany\controller\AuthController$setForgotPasswordView.class
+com\mycompany\service\IBookingSerive.class
 com\mycompany\model\Room$RoomBuilder.class
 com\mycompany\model\Customer$CustomerBuilder.class
 com\mycompany\model\User$UserBuilder.class
@@ -52,13 +56,16 @@ com\mycompany\controller\ForgotPasswordController.class
 com\mycompany\model\Room.class
 com\mycompany\view\RoomMapPanel.class
 com\mycompany\service\IOTPService.class
+com\mycompany\service\Iplm\CustomerIplm.class
 com\mycompany\service\ICustomer.class
 com\mycompany\view\SigninView$1.class
 com\mycompany\common\Validator.class
+com\mycompany\controller\FormRoomPanelController$bookRoom.class
 com\mycompany\request\RegisterRequest$RegisterRequestBuilder.class
 com\mycompany\respone\UserRespone.class
 com\mycompany\common\InfoRoom.class
 com\mycompany\view\RoomManagePanel$2.class
+com\mycompany\controller\FormRoomPanelController.class
 com\mycompany\controller\DashboardController$swapScreen.class
 com\mycompany\view\FormRoomPanel$1.class
 com\mycompany\view\RoomManagePanel$1.class
@@ -72,6 +79,7 @@ com\mycompany\controller\AuthController$loginListener.class
 com\mycompany\respone\OTPCodeRespone$OTPCodeResponeBuilder.class
 com\mycompany\view\ForgotPasswordView$1.class
 com\mycompany\dao\UserDAO.class
+com\mycompany\controller\BookingRoomController.class
 com\mycompany\controller\ForgotPasswordController$confirmNewPassword.class
 com\mycompany\request\LoginRequest.class
 com\mycompany\controller\ForgotPasswordController$setBtnBack.class

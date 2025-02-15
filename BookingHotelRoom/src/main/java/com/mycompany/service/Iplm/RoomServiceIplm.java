@@ -10,6 +10,7 @@ import com.mycompany.util.HibernateUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
  *
  * @author lminh
  */
+@Transactional
 public class RoomServiceIplm implements IRoomService{
 
     private EntityManager entityManager = HibernateUtil.getEntityManager();
@@ -63,6 +65,7 @@ public class RoomServiceIplm implements IRoomService{
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+            entityManager.getTransaction().rollback();
         }
         return false;
         

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -30,16 +31,23 @@ public class Booking {
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    @JoinColumn(name = "room_id", nullable = false)
     private Room room;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)
+    private Bill bill;
 
-    private LocalDate checkInTime;
+    private LocalDateTime checkInTime;
 
-    private LocalDate checkOutTime;
+    private LocalDateTime checkOutTime;
 
-    private LocalDate timeBooking;
+    private LocalDateTime timeBooking;
 }

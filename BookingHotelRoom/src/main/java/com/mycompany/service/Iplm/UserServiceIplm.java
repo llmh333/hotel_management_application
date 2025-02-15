@@ -31,14 +31,16 @@ public class UserServiceIplm implements IUserService {
     EntityManager entityManager = HibernateUtil.getEntityManager();
     
     @Override
-    public UserRespone login(LoginRequest loginRequest) {
+    public User login(LoginRequest loginRequest) {
         try {
             TypedQuery<User> query = entityManager.createQuery("FROM User WHERE username = :username", User.class);
             query.setParameter("username", loginRequest.getUsername());
             User user = query.getSingleResult();
             if (user != null) {
                 if (user.getUsername().equals(loginRequest.getUsername()) && checkPassword(loginRequest.getPassword(), user.getPassword())) {
-                    return convertToRespone(user);
+                    user.setUsername(null);
+                    user.setPassword(null);
+                    return user;
                 }
             } else return null;
             
@@ -53,6 +55,7 @@ public class UserServiceIplm implements IUserService {
     public UserRespone convertToRespone(User user) {
         if (user != null) {
         return new UserRespone().builder()
+            .id(user.getId())
             .name(user.getUsername())
             .birthDay(user.getBirthday())
             .email(user.getEmail())

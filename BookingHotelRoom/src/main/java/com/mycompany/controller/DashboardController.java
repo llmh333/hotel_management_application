@@ -6,6 +6,7 @@ package com.mycompany.controller;
 
 import com.mycompany.common.InfoRoom;
 import com.mycompany.model.Room;
+import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
 import com.mycompany.service.Iplm.RoomServiceIplm;
 import com.mycompany.util.HibernateUtil;
@@ -33,15 +34,17 @@ public class DashboardController {
     private final Color darkRedColor = new Color(140,17,23);
     private IRoomService roomService = new RoomServiceIplm();
     private DashboardView dashboardView;
-    public DashboardController(DashboardView dashboardView) {
+    private User user;
+    public DashboardController(DashboardView dashboardView, User user) {
         this.dashboardView = dashboardView;
+        this.user = user;
         initDashboardView();
     }
            
     public void initDashboardView() {
 //        showDashBoardView(new RoomMapPanel());
         RoomMapPanel roomMapPanel = new RoomMapPanel();
-        RoomMapController roomMapController = new RoomMapController(roomMapPanel);
+        RoomMapController roomMapController = new RoomMapController(roomMapPanel,user);
         this.dashboardView.addPanelToPanelScreen(roomMapController.getRoomMapPanel(), "RoomMap");
         this.dashboardView.addPanelToPanelScreen(new RoomManagePanel(), "RoomManagePanel");
         this.dashboardView.addPanelToPanelScreen(new PaymentPanel(), "PaymentPanel");
@@ -67,13 +70,13 @@ public class DashboardController {
             String act = e.getActionCommand();
             if (act.equals("Sơ đồ phòng")) {
                 screenRoomMap();
-                RoomMapController roomMapController = new RoomMapController(new RoomMapPanel());
+                RoomMapController roomMapController = new RoomMapController(new RoomMapPanel(), user);
                 RoomMapPanel roomMapPanel = roomMapController.getRoomMapPanel();
                 dashboardView.addPanelToPanelScreen(roomMapPanel, "RoomMapPanel");
                 showPanel("RoomMapPanel");
             }
             if (act.equals("Quản lý phòng")) {
-                RoomMapManageController roomMapManageController = new RoomMapManageController(new RoomManagePanel());
+                RoomMapManageController roomMapManageController = new RoomMapManageController(new RoomManagePanel(),user);
                 RoomManagePanel roomManagePanel = roomMapManageController.getRoomManagePanel();
                 screenRoomManage();
                 dashboardView.addPanelToPanelScreen(roomManagePanel, "RoomManagePanel");

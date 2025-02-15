@@ -13,13 +13,21 @@ import jakarta.persistence.Persistence;
  * @author lminh
  */
 public class HibernateUtil {
-    private static EntityManagerFactory entityManagerFactory;
-    public static EntityManager getEntityManager() {
+    private static EntityManagerFactory entityManagerFactory = buildEntityManagerFactory();
+    private static EntityManagerFactory buildEntityManagerFactory() {
         try {
-            entityManagerFactory = Persistence.createEntityManagerFactory("application-unit");
+            return Persistence.createEntityManagerFactory("application-unit");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return entityManagerFactory.createEntityManager();
+        return entityManagerFactory;
     } 
+    public static EntityManager getEntityManager() {
+        return entityManagerFactory.createEntityManager();
+    }
+    public static void closeEntityManeger() {
+        if (entityManagerFactory != null) {
+            entityManagerFactory.close();
+        }
+    }
 }

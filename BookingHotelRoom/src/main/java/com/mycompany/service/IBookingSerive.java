@@ -4,14 +4,19 @@
  */
 package com.mycompany.service;
 
-import com.mycompany.model.Customer;
+import com.mycompany.model.Booking;
+import java.util.List;
 
 /**
  *
  * @author lminh
  */
-public interface ICustomer {
-    public boolean addCustomer(Customer customer);
+public interface IBookingSerive {
     
-    public boolean deleteCustomer(String idCustomer);
+    public String createBooking(Booking booking);
+    
+    public boolean deleteBooking(Booking booking);
+    
+    public List<Booking> getAllBookings();
+    
 }

@@ -39,18 +39,19 @@ public class Customer {
     
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String birthday;
+
+    @Column(columnDefinition = "varchar(5)", nullable = false)
+    private String sex;
     
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String email;
-    
+
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String phoneNumber;
-    
-    @Column(columnDefinition = "varchar(100)", nullable = false)
-    private String status;
     
     @Column(columnDefinition = "varchar(100)", nullable = true)
     private int roomNumber;
 
-    
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings;
 }

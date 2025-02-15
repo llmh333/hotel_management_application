@@ -15,7 +15,7 @@ import com.mycompany.respone.UserRespone;
  */
 public interface IUserService {
     
-    public UserRespone login(LoginRequest loginRequest);
+    public User login(LoginRequest loginRequest);
     
     public int register(RegisterRequest registerRequest);
     

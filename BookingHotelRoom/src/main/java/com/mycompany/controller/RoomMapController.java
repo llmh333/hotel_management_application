@@ -6,8 +6,10 @@ package com.mycompany.controller;
 
 import com.mycompany.common.InfoRoom;
 import com.mycompany.model.Room;
+import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
 import com.mycompany.service.Iplm.RoomServiceIplm;
+import com.mycompany.view.DashboardView;
 import com.mycompany.view.FormRoomPanel;
 import com.mycompany.view.RoomMapPanel;
 import java.util.List;
@@ -20,9 +22,12 @@ import javax.swing.JPanel;
 public class RoomMapController {
     private RoomMapPanel roomMapPanel;
     private IRoomService roomService = new RoomServiceIplm();
+    private User user;
+    private DashboardView dashboardView;
     
-    public RoomMapController(RoomMapPanel roomMapPanel) {
+    public RoomMapController(RoomMapPanel roomMapPanel, User user) {
         this.roomMapPanel = roomMapPanel;
+        this.user = user;
         initRoomMapPanel();
     }
     
@@ -30,7 +35,7 @@ public class RoomMapController {
         return this.roomMapPanel;
     }
     
-    public void initRoomMapPanel() {
+    public void showListRoom() {
         List<Room> rooms = roomService.getAllRoom();
         int roomAvail = 0, roomNotAvail = 0, roomBusy = 0;
         if (!rooms.isEmpty()) {
@@ -39,14 +44,18 @@ public class RoomMapController {
                 FormRoomPanel formRoomPanel = new FormRoomPanel();
                 if (room.getStatus().equals(InfoRoom.STATUS_NOT_AVAILABEL)) {
                     formRoomPanel.setBgrPanelStatusRoom(InfoRoom.redStatus);
+                    formRoomPanel.setPopupMenuItem("Đặt phòng", false);
                     roomNotAvail++;
                 }
                 if (room.getStatus().equals(InfoRoom.STATUS_AVAILABEL)) {
                     formRoomPanel.setBgrPanelStatusRoom(InfoRoom.greenStatus);
+                    formRoomPanel.setPopupMenuItem("Thanh toán", false);
                     roomAvail++;
                 }
                 if (room.getStatus().equals(InfoRoom.STATUS_BUSY)) {
                     formRoomPanel.setBgrPanelStatusRoom(InfoRoom.navyStatus);
+                    formRoomPanel.setPopupMenuItem("Đặt phòng", false);
+                    formRoomPanel.setPopupMenuItem("Thanh toán", false);
                     roomBusy++;
                 }
                 formRoomPanel.setLabelRoomType(room.getRoomType());
@@ -56,6 +65,7 @@ public class RoomMapController {
                 roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
                 roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
                 roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));
+                new FormRoomPanelController(formRoomPanel, roomService, room.getRoomNumber(), user);
                 roomMapPanel.addFormRoomPanel(formRoomPanel);    
             }
         } else {
@@ -64,6 +74,9 @@ public class RoomMapController {
             roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
             roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));
         }
+    }
+    public void initRoomMapPanel() {
+        showListRoom();
         
     }
     public void showRoomMap() {

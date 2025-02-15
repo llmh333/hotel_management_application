@@ -4,6 +4,7 @@
  */
 package com.mycompany.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -62,4 +63,6 @@ public class User {
     @Column(columnDefinition = "varchar(100)", nullable = false)
     private String sex;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings;
 }
