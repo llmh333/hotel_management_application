@@ -4,19 +4,21 @@
  */
 package com.mycompany.controller;
 
+import com.mycompany.common.InfoRoom;
 import com.mycompany.model.Room;
 import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
 import com.mycompany.service.Iplm.RoomServiceIplm;
 import com.mycompany.util.HibernateUtil;
-import com.mycompany.view.ChangeInfoRoom;
-import com.mycompany.view.RoomManagePanel;
+import com.mycompany.view.ChangeInfoRoomView;
+import com.mycompany.view.panel.RoomManagePanel;
 import jakarta.persistence.EntityManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -54,7 +56,13 @@ public class RoomMapManageController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Room room = Room.builder()
+            if (roomManagePanel.getRoomNumber().isBlank() || roomManagePanel.getRoomPrice() == null || roomManagePanel.getRoomStatus().isBlank()) {
+                JOptionPane.showMessageDialog(roomManagePanel, "Vui lòng điền đầy đủ thông tin");
+            }
+            else {
+                int ans = JOptionPane.showConfirmDialog(roomManagePanel, "Xác nhận thêm phòng","Thêm phòng", JOptionPane.OK_CANCEL_OPTION);
+                if (ans == 0) {
+                    Room room = Room.builder()
                     .roomNumber(roomManagePanel.getRoomNumber())
                     .roomType(roomManagePanel.getRoomType())
                     .roomFeature(roomManagePanel.getRoomFeature())
@@ -62,12 +70,15 @@ public class RoomMapManageController {
                     .price(roomManagePanel.getRoomPrice())
                     .status(roomManagePanel.getRoomStatus())
                     .build();
-            if (roomService.addRoom(room)) {
-                JOptionPane.showMessageDialog(roomManagePanel, "Thêm phòng thành công");
-                showListRoom();
-            }
-            else {
-                JOptionPane.showMessageDialog(roomManagePanel, "Số phòng đã tồn tại");
+                    if (roomService.addRoom(room)) {
+                        JOptionPane.showMessageDialog(roomManagePanel, "Thêm phòng thành công");
+                        showListRoom();
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(roomManagePanel, "Số phòng đã tồn tại");
+                    }
+                }
+                
             }
         }
     }
@@ -77,8 +88,13 @@ public class RoomMapManageController {
         @Override
         public void actionPerformed(ActionEvent e) {
             Room room = roomService.findRoomByRoomNumber(roomManagePanel.getRoomSelect());
-            ChangeInfoRoomController changeInfoRoomController = new ChangeInfoRoomController(new ChangeInfoRoom(), roomService, roomManagePanel,room);
-            showListRoom();
+            if (room.getStatus().equals(InfoRoom.STATUS_NOT_AVAILABEL)) {
+                JOptionPane.showMessageDialog(roomManagePanel, "Không thể thay đổi thông tin phòng đang có người thuê");
+            }
+            else {
+                ChangeInfoRoomController changeInfoRoomController = new ChangeInfoRoomController(new ChangeInfoRoomView(), roomService, roomManagePanel,room);
+                showListRoom();
+            }
         }
         
     }
@@ -91,11 +107,12 @@ public class RoomMapManageController {
             if (ansConfirm == 0) {
                 String roomNumber = roomManagePanel.getRoomSelect();
                 System.out.println(roomNumber);
-                if (roomService.deleteRoom(roomNumber)) {
+                String status = roomService.deleteRoom(roomNumber);
+                if (status.equals("Thành công")) {
                     JOptionPane.showMessageDialog(roomManagePanel, "Xóa phòng thành công");
                     showListRoom();
-                } else {
-                    JOptionPane.showMessageDialog(roomManagePanel, "Có lỗi xảy ra vui lòng thử lại");
+                } else if (status.equals("Không thể xóa phòng đang có người")) {
+                    JOptionPane.showMessageDialog(roomManagePanel, status);
                 }
             }
            

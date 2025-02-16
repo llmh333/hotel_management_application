@@ -13,11 +13,17 @@ import com.mycompany.service.IBookingSerive;
 import com.mycompany.service.ICustomer;
 import com.mycompany.service.IRoomService;
 import com.mycompany.service.Iplm.BookingServiceIplm;
-import com.mycompany.service.Iplm.CustomerIplm;
-import com.mycompany.view.BookingRoom;
+import com.mycompany.service.Iplm.CustomerServiceIplm;
+import com.mycompany.view.AddCustomerView;
+import com.mycompany.view.BookingRoomView;
 import com.mycompany.view.DashboardView;
-import com.mycompany.view.RoomMapPanel;
+import com.mycompany.view.panel.RoomMapPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,53 +31,57 @@ import javax.swing.JOptionPane;
  * @author lminh
  */
 public class BookingRoomController {
-    private BookingRoom bookingRoom;
-    private ICustomer customerService = new CustomerIplm();
+    private BookingRoomView bookingRoom;
+    private ICustomer customerService = new CustomerServiceIplm();
     private IRoomService roomService;
     private IBookingSerive bookingSerive = new BookingServiceIplm();
     private Room room;
     private User user;
+    public Customer customer;
+    private List<Customer> customers;
     private DashboardView dashboardView;
     
-    public BookingRoomController(BookingRoom bookingRoom, IRoomService roomService, Room room, User user) {
+    public BookingRoomController(BookingRoomView bookingRoom, IRoomService roomService, Room room, User user) {
        this.bookingRoom = bookingRoom;
        this.roomService = roomService;
        this.room = room;
        this.user = user;
+       this.customers = customerService.getAllCustomers();
        initBookingRoom();
+    }
+    
+    public void showBooingView() {
+        bookingRoom.setVisible(true);
+    }
+    
+    public void reload_bookingview() {
+        customers = customerService.getAllCustomers();
     }
     
     public void initBookingRoom() {
         this.bookingRoom.setBtnConFirm(e -> book());
+        this.bookingRoom.setSelectionPhoneNumber(new SelectPhoneNumber());
+        this.bookingRoom.setBtnAddCustomer(new AddCustomer());
+        this.bookingRoom.reload_customers(customers);
     }
     
     public void book() {
-        Customer customer = Customer.builder()
-                .name(bookingRoom.getName())
-                .birthday(bookingRoom.getBirthday())
-                .phoneNumber(bookingRoom.getPhoneNumnber())
-                .email(bookingRoom.getEmail())
-                .sex(bookingRoom.getSex())
-                .build();
-   
         room.setCheckInTime(bookingRoom.getCheckinTime());
-        room.setCheckoutTime(bookingRoom.getCheckoutTime());
+        room.setCheckOutTime(bookingRoom.getCheckoutTime());
         room.setStatus(InfoRoom.STATUS_NOT_AVAILABEL);
+        room.setCustomer_id(customer.getId());
         
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println(room);
         Booking booking = Booking.builder()         
                 .checkInTime(bookingRoom.getCheckinTime())
                 .checkOutTime(bookingRoom.getCheckoutTime())
-                .customer(customer)
-                .room(room)
-                .customer(customer)
+                .customer(this.customer)
                 .room(room)
                 .user(user)
                 .timeBooking(localDateTime)
                 .build();
         try {
-            customerService.addCustomer(customer);
             roomService.changeInfoRoom(room);
             bookingSerive.createBooking(booking);
             JOptionPane.showMessageDialog(bookingRoom, "Đặt phòng thành công");
@@ -83,6 +93,30 @@ public class BookingRoomController {
 
     }
     
+    private class SelectPhoneNumber extends MouseAdapter { 
+        public Customer customer;
+        public void mouseClicked(MouseEvent event) {
+            if (event.getClickCount() == 2) {
+                this.customer = bookingRoom.getSelectionPhoneNumber();
+                BookingRoomController.this.customer = this.customer;
+                System.out.println(customer);
+                bookingRoom.setName(customer.getName());
+                bookingRoom.setEmail(customer.getEmail());
+                bookingRoom.setBirthday(customer.getBirthday());
+                bookingRoom.setPhoneNumnber(customer.getPhoneNumber());
+                bookingRoom.setSex(customer.getSex());
+            }
+        }     
+    }
     
+    private class AddCustomer implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new AddCustomerController(new AddCustomerView(), room, user);
+            reload_bookingview();
+        }
+        
+    }
     
 }

@@ -7,9 +7,9 @@ package com.mycompany.controller;
 import com.mycompany.model.Room;
 import com.mycompany.service.IRoomService;
 import com.mycompany.service.Iplm.RoomServiceIplm;
-import com.mycompany.view.ChangeInfoRoom;
-import com.mycompany.view.RoomManagePanel;
-import com.mycompany.view.RoomMapPanel;
+import com.mycompany.view.ChangeInfoRoomView;
+import com.mycompany.view.panel.RoomManagePanel;
+import com.mycompany.view.panel.RoomMapPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -21,11 +21,11 @@ import javax.swing.JOptionPane;
  * @author lminh
  */
 public class ChangeInfoRoomController {
-    private ChangeInfoRoom changeInfoRoom;
+    private ChangeInfoRoomView changeInfoRoom;
     private IRoomService roomService;
     private Room roomChangeInfo;
     private RoomManagePanel roomManagePanel;
-    public ChangeInfoRoomController(ChangeInfoRoom changeInfoRoom, IRoomService roomService, RoomManagePanel roomManagePanel, Room roomChangeInfo) {
+    public ChangeInfoRoomController(ChangeInfoRoomView changeInfoRoom, IRoomService roomService, RoomManagePanel roomManagePanel, Room roomChangeInfo) {
         this.roomService = roomService;
         this.roomChangeInfo = roomChangeInfo;
         this.changeInfoRoom = changeInfoRoom;
@@ -40,9 +40,9 @@ public class ChangeInfoRoomController {
         this.changeInfoRoom.setRoomQuantity(roomChangeInfo.getQuantity());
         this.changeInfoRoom.setRoomFeature(roomChangeInfo.getRoomFeature());
         this.changeInfoRoom.setRoomPrice(String.valueOf(roomChangeInfo.getPrice()));
+        this.changeInfoRoom.setRoomStatus(roomChangeInfo.getStatus());
         this.changeInfoRoom.setBtnConFirmAct(new BtnConfirm());
     } 
-    
     
     private class BtnConfirm implements ActionListener {
 
@@ -52,6 +52,7 @@ public class ChangeInfoRoomController {
             roomChangeInfo.setRoomFeature(changeInfoRoom.getRoomFeature());
             roomChangeInfo.setQuantity(changeInfoRoom.getRoomQuantity());
             roomChangeInfo.setPrice(changeInfoRoom.getRoomPrice());
+            roomChangeInfo.setStatus(changeInfoRoom.getRoomStatus());
             
             if (roomService.changeInfoRoom(roomChangeInfo)) {
                 JOptionPane.showMessageDialog(changeInfoRoom, "Thay đổi thông tin phòng thành công");
@@ -59,7 +60,6 @@ public class ChangeInfoRoomController {
                 System.out.println(rooms);
                 roomManagePanel.setDataTableListRoom(rooms);
                 changeInfoRoom.dispose();
-
             }
             else {
                 JOptionPane.showMessageDialog(changeInfoRoom, "Có lỗi xảy ra vui lòng thử lại");

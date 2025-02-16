@@ -22,4 +22,6 @@ public class ExitCodeConfig {
     public static int EXIT_CODE_EMAIL_INVALID = 5;
     
     public static int EXIT_CODE_NO_RESULT = 6;
+    
+    public static int EXIT_CODE_ELEMENT_EXISTS = 7;
 }

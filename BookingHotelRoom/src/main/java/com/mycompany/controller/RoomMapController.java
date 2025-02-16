@@ -10,10 +10,9 @@ import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
 import com.mycompany.service.Iplm.RoomServiceIplm;
 import com.mycompany.view.DashboardView;
-import com.mycompany.view.FormRoomPanel;
-import com.mycompany.view.RoomMapPanel;
+import com.mycompany.view.panel.FormRoomPanel;
+import com.mycompany.view.panel.RoomMapPanel;
 import java.util.List;
-import javax.swing.JPanel;
 
 /**
  *
@@ -49,27 +48,25 @@ public class RoomMapController {
                 }
                 if (room.getStatus().equals(InfoRoom.STATUS_AVAILABEL)) {
                     formRoomPanel.setBgrPanelStatusRoom(InfoRoom.greenStatus);
-                    formRoomPanel.setPopupMenuItem("Thanh toán", false);
                     roomAvail++;
                 }
                 if (room.getStatus().equals(InfoRoom.STATUS_BUSY)) {
                     formRoomPanel.setBgrPanelStatusRoom(InfoRoom.navyStatus);
                     formRoomPanel.setPopupMenuItem("Đặt phòng", false);
-                    formRoomPanel.setPopupMenuItem("Thanh toán", false);
+                    formRoomPanel.setPopupMenuItem("Chi tiết phòng", false);
                     roomBusy++;
                 }
                 formRoomPanel.setLabelRoomType(room.getRoomType());
                 formRoomPanel.setLabelRoomNumber(room.getRoomNumber());
                 formRoomPanel.setLabelRoomQuantity(room.getQuantity());
                 formRoomPanel.setLabelRoomStatus(room.getStatus());
+                new FormRoomPanelController(formRoomPanel, roomService, room.getRoomNumber(), user);
                 roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
                 roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
                 roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));
-                new FormRoomPanelController(formRoomPanel, roomService, room.getRoomNumber(), user);
                 roomMapPanel.addFormRoomPanel(formRoomPanel);    
             }
         } else {
-            System.out.println("hello");
             roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
             roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
             roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));

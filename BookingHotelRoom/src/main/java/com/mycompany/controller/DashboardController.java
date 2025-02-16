@@ -11,12 +11,12 @@ import com.mycompany.service.IRoomService;
 import com.mycompany.service.Iplm.RoomServiceIplm;
 import com.mycompany.util.HibernateUtil;
 import com.mycompany.view.DashboardView;
-import com.mycompany.view.FormRoomPanel;
-import com.mycompany.view.InforPersonPanel;
-import com.mycompany.view.PaymentPanel;
-import com.mycompany.view.RoomManagePanel;
-import com.mycompany.view.RoomMapPanel;
-import com.mycompany.view.StatisticalPanel;
+import com.mycompany.view.panel.FormRoomPanel;
+import com.mycompany.view.panel.InforPersonPanel;
+import com.mycompany.view.panel.PaymentPanel;
+import com.mycompany.view.panel.RoomManagePanel;
+import com.mycompany.view.panel.RoomMapPanel;
+import com.mycompany.view.panel.StatisticalPanel;
 import jakarta.persistence.EntityManager;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -76,14 +76,17 @@ public class DashboardController {
                 showPanel("RoomMapPanel");
             }
             if (act.equals("Quản lý phòng")) {
+                screenRoomManage();
                 RoomMapManageController roomMapManageController = new RoomMapManageController(new RoomManagePanel(),user);
                 RoomManagePanel roomManagePanel = roomMapManageController.getRoomManagePanel();
-                screenRoomManage();
                 dashboardView.addPanelToPanelScreen(roomManagePanel, "RoomManagePanel");
                 showPanel("RoomManagePanel");
             }
             if (act.equals("Thanh toán")) {
                 screenPayment();
+                PaymentPanelController paymentPanelController = new PaymentPanelController(new PaymentPanel());
+                PaymentPanel paymentPanel = paymentPanelController.getPaymentPanel();
+                dashboardView.addPanelToPanelScreen(paymentPanel, "PaymentPanel");
                 showPanel("PaymentPanel");
             }
             if (act.equals("Thống kê")) {

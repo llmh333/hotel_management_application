@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -58,9 +59,12 @@ public class Room {
     
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
-
+    
+    @Column(name = "customer_id")
+    private String customer_id;
+    
     private LocalDateTime checkInTime;
     
-    private LocalDateTime checkoutTime;
+    private LocalDateTime checkOutTime;
     
 }

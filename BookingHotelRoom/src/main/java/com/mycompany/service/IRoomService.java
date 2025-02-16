@@ -17,9 +17,10 @@ public interface IRoomService {
     
     public boolean changeInfoRoom(Room room);
     
-    public boolean deleteRoom(String roomNumber);
+    public String deleteRoom(String roomNumber);
     
     public List<Room> getAllRoom();
     
     public Room findRoomByRoomNumber(String roomNumber);
+    
 }

@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -55,20 +56,19 @@ public class RoomServiceIplm implements IRoomService{
     }
 
     @Override
-    public boolean deleteRoom(String roomNumber) {
+    public String deleteRoom(String roomNumber) {
         try {
             Query query = entityManager.createQuery("DELETE FROM Room WHERE roomNumber = :roomNumber");
             query.setParameter("roomNumber", roomNumber);
             entityManager.getTransaction().begin();
             int row = query.executeUpdate();
             entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+            return "Thành công";
+        } catch (Throwable ConstraintViolationExceptiont) {          
             entityManager.getTransaction().rollback();
-        }
-        return false;
-        
+            return "Không thể xóa phòng đang có người";
+
+        }        
     }
 
     @Override

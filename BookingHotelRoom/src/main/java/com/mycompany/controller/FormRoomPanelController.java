@@ -7,10 +7,11 @@ package com.mycompany.controller;
 import com.mycompany.model.Room;
 import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
-import com.mycompany.view.BookingRoom;
+import com.mycompany.view.BookingRoomView;
 import com.mycompany.view.DashboardView;
-import com.mycompany.view.FormRoomPanel;
-import com.mycompany.view.RoomMapPanel;
+import com.mycompany.view.panel.FormRoomPanel;
+import com.mycompany.view.InformationRoomView;
+import com.mycompany.view.panel.RoomMapPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,17 +35,30 @@ public class FormRoomPanelController {
     }
     
     public void initFormRoomPanel() {
-        this.formRoomPanel.setMenuItemBookRoom(new bookRoom());
+        this.formRoomPanel.setMenuItemBookRoom(new BookRoom());
+        this.formRoomPanel.setMenuItemInforRoom(new InforRoom());
     }
     
-    private class bookRoom implements ActionListener {
+    private class BookRoom implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            BookingRoom bookingRoom = new BookingRoom();
+            BookingRoomView bookingRoom = new BookingRoomView();
             bookingRoom.setVisible(true);
             Room room = roomService.findRoomByRoomNumber(roomNumber);
             BookingRoomController bookingRoomController = new BookingRoomController(bookingRoom, roomService, room , user);
         }
+    }
+    
+    private class InforRoom implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            InformationRoomView informationRoom = new InformationRoomView();
+            informationRoom.setVisible(true);
+            Room room = roomService.findRoomByRoomNumber(roomNumber);
+            InformationRoomController informationRoomController = new InformationRoomController(informationRoom, room);
+        }
+        
     }
 }
