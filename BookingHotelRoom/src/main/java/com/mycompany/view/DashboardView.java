@@ -4,7 +4,7 @@
  */
 package com.mycompany.view;
 
-import com.mycompany.controller.RoomMapController;
+import com.mycompany.controller.panelController.RoomMapController;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;

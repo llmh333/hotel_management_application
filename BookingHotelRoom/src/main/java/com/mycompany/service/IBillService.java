@@ -10,12 +10,10 @@ import com.mycompany.model.Bill;
  *
  * @author lminh
  */
-public interface IBill {
+public interface IBillService {
     
-    public void addBill(Bill bill);
+    public boolean addBill(Bill bill);
     
-    public void changeInfoBill(String idBill);
-    
-    public void deleteBill(String idBill);
+    public boolean deleteBill(String idBill);
     
 }

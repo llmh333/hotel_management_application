@@ -6,10 +6,10 @@ package com.mycompany.controller;
 
 import com.mycompany.model.Room;
 import com.mycompany.model.Customer;
-import com.mycompany.service.ICustomer;
 import com.mycompany.service.Iplm.CustomerServiceIplm;
 import com.mycompany.view.InformationRoomView;
 import com.sun.mail.auth.OAuth2SaslClientFactory;
+import com.mycompany.service.ICustomerService;
 
 /**
  *
@@ -17,7 +17,7 @@ import com.sun.mail.auth.OAuth2SaslClientFactory;
  */
 public class InformationRoomController {
     
-    private ICustomer customerService = new CustomerServiceIplm();
+    private ICustomerService customerService = new CustomerServiceIplm();
     private InformationRoomView informationRoom;
     private Room room;
     

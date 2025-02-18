@@ -17,6 +17,8 @@ public class AddCustomerView extends javax.swing.JFrame {
      */
     public AddCustomerView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /**

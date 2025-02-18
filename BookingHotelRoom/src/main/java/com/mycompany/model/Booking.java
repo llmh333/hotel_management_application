@@ -42,7 +42,7 @@ public class Booking {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
-    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "booking")
     private Bill bill;
 
     private LocalDateTime checkInTime;

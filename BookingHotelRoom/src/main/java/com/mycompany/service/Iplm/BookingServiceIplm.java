@@ -5,9 +5,13 @@
 package com.mycompany.service.Iplm;
 
 import com.mycompany.model.Booking;
+import com.mycompany.model.Customer;
+import com.mycompany.model.Room;
 import com.mycompany.service.IBookingSerive;
 import com.mycompany.util.HibernateUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 
@@ -33,10 +37,12 @@ public class BookingServiceIplm implements IBookingSerive{
     }
 
     @Override
-    public boolean deleteBooking(Booking booking) {
+    public boolean deleteBookingByID(String idBooking) {
         try {
+            Query query = entityManager.createQuery("delete from Booking where id = :idBooking");
+            query.setParameter("idBooking", idBooking);
             entityManager.getTransaction().begin();
-            entityManager.remove(booking);
+            query.executeUpdate();
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -55,6 +61,31 @@ public class BookingServiceIplm implements IBookingSerive{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<Booking> findBookingByCustomer(Customer customer) {
+        try {
+            TypedQuery<Booking> query = entityManager.createQuery("FROM Booking WHERE customer = :customer", Booking.class);
+            query.setParameter("customer", customer);
+            List<Booking> bookings = query.getResultList();
+            return bookings;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Booking findBookingByRoom(Room room) {
+        try {
+            TypedQuery<Booking> query = entityManager.createQuery("FROM Booking WHERE room = :room ", Booking.class);
+            query.setParameter("room", room);
+            Booking bookingRespone = query.getSingleResult();
+            return bookingRespone;
+        } catch (NoResultException e) {
+            return null;
+        }
     }
     
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.controller;
+package com.mycompany.controller.panelController;
 
 import com.mycompany.common.InfoRoom;
 import com.mycompany.model.Room;
@@ -28,6 +28,10 @@ public class RoomMapController {
         this.roomMapPanel = roomMapPanel;
         this.user = user;
         initRoomMapPanel();
+    }
+
+    public void reload_Service() {
+        roomService = new RoomServiceIplm();
     }
     
     public RoomMapPanel getRoomMapPanel() {
@@ -60,7 +64,7 @@ public class RoomMapController {
                 formRoomPanel.setLabelRoomNumber(room.getRoomNumber());
                 formRoomPanel.setLabelRoomQuantity(room.getQuantity());
                 formRoomPanel.setLabelRoomStatus(room.getStatus());
-                new FormRoomPanelController(formRoomPanel, roomService, room.getRoomNumber(), user);
+                new FormRoomPanelController(formRoomPanel, RoomMapController.this, room.getRoomNumber(), user);
                 roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
                 roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
                 roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));

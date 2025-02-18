@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.controller;
+package com.mycompany.controller.panelController;
 
 import com.mycompany.common.InfoRoom;
+import com.mycompany.controller.ChangeInfoRoomController;
 import com.mycompany.model.Room;
 import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;

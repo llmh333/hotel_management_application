@@ -6,7 +6,6 @@ package com.mycompany.controller;
 
 import com.mycompany.common.ExitCodeConfig;
 import static com.mycompany.common.ExitCodeConfig.*;
-import com.mycompany.service.ICustomer;
 import com.mycompany.service.Iplm.CustomerServiceIplm;
 import com.mycompany.view.AddCustomerView;
 import com.mycompany.model.Customer;
@@ -18,6 +17,7 @@ import com.mycompany.view.BookingRoomView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import com.mycompany.service.ICustomerService;
 
 /**
  *
@@ -25,14 +25,16 @@ import javax.swing.JOptionPane;
  */
 public class AddCustomerController {
     
-    private ICustomer customerService = new CustomerServiceIplm();
+    private ICustomerService customerService = new CustomerServiceIplm();
     private AddCustomerView addCustomerView;
     private Room room;
     private User user;
+    private BookingRoomController bookingRoomController;
     
     
-    public AddCustomerController(AddCustomerView addCustomerView, Room room, User user ) {
+    public AddCustomerController(AddCustomerView addCustomerView, Room room, User user, BookingRoomController bookingRoomController) {
         this.addCustomerView = addCustomerView;
+        this.bookingRoomController = bookingRoomController;
         this.room = room;
         this.user = user;
         initAddCustomerController();
@@ -67,11 +69,10 @@ public class AddCustomerController {
                         .build();
                 
                 int check_add_customer = customerService.addCustomer(customer);
-                
-                
                 if (check_add_customer == EXIT_CODE_OK) {
                     JOptionPane.showMessageDialog(addCustomerView, "Thêm khách hàng mới thành công");
-                    IRoomService roomService = new RoomServiceIplm();
+                    bookingRoomController.reloadCustomers();
+                    addCustomerView.dispose();
                 } else if (check_add_customer == EXIT_CODE_ELEMENT_EXISTS) {
                     JOptionPane.showMessageDialog(addCustomerView, "Khách hàng này đã có trong hệ thống");
                 }

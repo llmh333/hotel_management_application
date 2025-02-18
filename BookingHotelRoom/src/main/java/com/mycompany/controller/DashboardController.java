@@ -4,6 +4,9 @@
  */
 package com.mycompany.controller;
 
+import com.mycompany.controller.panelController.RoomMapManageController;
+import com.mycompany.controller.panelController.PaymentPanelController;
+import com.mycompany.controller.panelController.RoomMapController;
 import com.mycompany.common.InfoRoom;
 import com.mycompany.model.Room;
 import com.mycompany.model.User;
@@ -32,7 +35,6 @@ import javax.swing.JPanel;
 public class DashboardController {
     private final Color redColor = new Color(175,17,23);
     private final Color darkRedColor = new Color(140,17,23);
-    private IRoomService roomService = new RoomServiceIplm();
     private DashboardView dashboardView;
     private User user;
     public DashboardController(DashboardView dashboardView, User user) {
@@ -42,10 +44,9 @@ public class DashboardController {
     }
            
     public void initDashboardView() {
-//        showDashBoardView(new RoomMapPanel());
-        RoomMapPanel roomMapPanel = new RoomMapPanel();
-        RoomMapController roomMapController = new RoomMapController(roomMapPanel,user);
-        this.dashboardView.addPanelToPanelScreen(roomMapController.getRoomMapPanel(), "RoomMap");
+        RoomMapController roomMapController = new RoomMapController(new RoomMapPanel(),user);
+        RoomMapPanel roomMapPanel = roomMapController.getRoomMapPanel();
+        this.dashboardView.addPanelToPanelScreen(roomMapPanel, "RoomMap");
         this.dashboardView.addPanelToPanelScreen(new RoomManagePanel(), "RoomManagePanel");
         this.dashboardView.addPanelToPanelScreen(new PaymentPanel(), "PaymentPanel");
         this.dashboardView.addPanelToPanelScreen(new StatisticalPanel(), "StatisticalPanel");
@@ -62,9 +63,9 @@ public class DashboardController {
             CardLayout cardLayout = (CardLayout) dashboardView.getPanelScreen().getLayout();
             cardLayout.show(dashboardView.getPanelScreen(), namePanel);
         }
+    
     private class swapScreen implements ActionListener {
-        
-        
+         
         @Override
         public void actionPerformed(ActionEvent e) {
             String act = e.getActionCommand();

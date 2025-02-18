@@ -5,7 +5,6 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Customer;
-import com.mycompany.service.ICustomer;
 import com.mycompany.service.Iplm.CustomerServiceIplm;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -13,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import com.mycompany.service.ICustomerService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class BookingRoomView extends javax.swing.JFrame {
     /**
      * Creates new form BookingRoom
      */
-    private ICustomer customerService = new CustomerServiceIplm();
+    private ICustomerService customerService = new CustomerServiceIplm();
     private List<Customer> customers;
     
     

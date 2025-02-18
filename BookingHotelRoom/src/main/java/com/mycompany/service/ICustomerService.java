@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author lminh
  */
-public interface ICustomer {
+public interface ICustomerService {
     
     public int addCustomer(Customer customer);
     

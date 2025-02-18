@@ -24,8 +24,7 @@ import com.mycompany.view.DashboardView;
  *
  * @author lminh
  */
-public final class AuthController {
-//    private final UserDAO userDAO;
+public class AuthController {
     private SigninView signinView;
     private SignupView signupView;
     private IUserService userService = new UserServiceIplm();

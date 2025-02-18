@@ -6,18 +6,18 @@ package com.mycompany.service.Iplm;
 
 import com.mycompany.common.ExitCodeConfig;
 import com.mycompany.model.Customer;
-import com.mycompany.service.ICustomer;
 import com.mycompany.util.HibernateUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
+import com.mycompany.service.ICustomerService;
 
 /**
  *
  * @author lminh
  */
-public class CustomerServiceIplm implements ICustomer{
+public class CustomerServiceIplm implements ICustomerService{
     
     public EntityManager entityManager = HibernateUtil.getEntityManager();
     
@@ -27,14 +27,11 @@ public class CustomerServiceIplm implements ICustomer{
             TypedQuery<Customer> query = entityManager.createQuery("FROM Customer WHERE phoneNumber = :phoneNumber", Customer.class);
             query.setParameter("phoneNumber", customer.getPhoneNumber());
             Customer c = query.getSingleResult();
-            
             return ExitCodeConfig.EXIT_CODE_ELEMENT_EXISTS;
         } catch (NoResultException e) {
-            
             entityManager.getTransaction().begin();
             entityManager.persist(customer);
             entityManager.getTransaction().commit();
-            e.printStackTrace();
             return ExitCodeConfig.EXIT_CODE_OK;
         }
         

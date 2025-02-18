@@ -2,11 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.controller;
+package com.mycompany.controller.panelController;
 
+import com.mycompany.controller.BookingRoomController;
+import com.mycompany.controller.InformationRoomController;
 import com.mycompany.model.Room;
 import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
+import com.mycompany.service.Iplm.RoomServiceIplm;
 import com.mycompany.view.BookingRoomView;
 import com.mycompany.view.DashboardView;
 import com.mycompany.view.panel.FormRoomPanel;
@@ -21,14 +24,14 @@ import java.awt.event.ActionListener;
  */
 public class FormRoomPanelController {
     private FormRoomPanel formRoomPanel;
-    private IRoomService roomService;
+    private IRoomService roomService = new RoomServiceIplm();
     private String roomNumber;
     private User user;
-    private DashboardView dashboardView;
+    private RoomMapController roomMapController;
     
-    public FormRoomPanelController(FormRoomPanel formRoomPanel, IRoomService roomService, String roomNumber, User user) {
+    public FormRoomPanelController(FormRoomPanel formRoomPanel, RoomMapController roomMapController , String roomNumber, User user) {
         this.formRoomPanel = formRoomPanel;
-        this.roomService = roomService;
+        this.roomMapController = roomMapController;
         this.roomNumber = roomNumber;
         this.user = user;
         initFormRoomPanel();
@@ -46,7 +49,7 @@ public class FormRoomPanelController {
             BookingRoomView bookingRoom = new BookingRoomView();
             bookingRoom.setVisible(true);
             Room room = roomService.findRoomByRoomNumber(roomNumber);
-            BookingRoomController bookingRoomController = new BookingRoomController(bookingRoom, roomService, room , user);
+            BookingRoomController bookingRoomController = new BookingRoomController(bookingRoom, roomMapController, room , user);
         }
     }
     
