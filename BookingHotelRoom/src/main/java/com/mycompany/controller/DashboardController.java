@@ -8,6 +8,7 @@ import com.mycompany.controller.panelController.RoomMapManageController;
 import com.mycompany.controller.panelController.PaymentPanelController;
 import com.mycompany.controller.panelController.RoomMapController;
 import com.mycompany.common.InfoRoom;
+import com.mycompany.controller.panelController.StatiscialPanelController;
 import com.mycompany.model.Room;
 import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
@@ -92,6 +93,9 @@ public class DashboardController {
             }
             if (act.equals("Thống kê")) {
                 screenStatistical();
+                StatisticalPanel statisticalPanel = new StatisticalPanel();
+                StatiscialPanelController statiscialPanelController = new StatiscialPanelController(statisticalPanel);
+                dashboardView.addPanelToPanelScreen(statisticalPanel, "StatisticalPanel");
                 showPanel("StatisticalPanel");
             }
             if (act.equals("Thông tin cá nhân")) {

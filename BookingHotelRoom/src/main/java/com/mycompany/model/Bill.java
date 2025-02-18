@@ -8,12 +8,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 
 /**
  *
@@ -23,6 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 @Entity
 public class Bill {
@@ -38,7 +35,7 @@ public class Bill {
     private LocalDateTime paymentTime;
 
     @Column(nullable = false)
-    private String totalPrice;
+    private double totalPrice;
     
     @Column(nullable = false)
     private double totalHours;

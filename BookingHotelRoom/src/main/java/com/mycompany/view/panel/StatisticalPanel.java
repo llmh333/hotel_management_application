@@ -4,6 +4,17 @@
  */
 package com.mycompany.view.panel;
 
+import com.mycompany.model.Bill;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
  *
  * @author lminh
@@ -27,31 +38,171 @@ public class StatisticalPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        boxDate = new javax.swing.JComboBox<>();
+        dateFrom = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableStatiscial = new javax.swing.JTable();
+        btnConfirm = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        dateTo = new com.toedter.calendar.JDateChooser();
 
         setMinimumSize(new java.awt.Dimension(800, 600));
 
         jLabel2.setText("Thống kê theo");
+
+        boxDate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày", "Tháng", "Năm" }));
+
+        dateFrom.setDateFormatString("dd , MMM , y");
+
+        tableStatiscial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "SL Hóa đơn", "Tổng doanh thu", "Trung bình doanh thu", "Thời gian", "Hóa đơn cao nhất", "Hóa đơn thấp nhất"
+            }
+        ));
+        jScrollPane1.setViewportView(tableStatiscial);
+        if (tableStatiscial.getColumnModel().getColumnCount() > 0) {
+            tableStatiscial.getColumnModel().getColumn(0).setPreferredWidth(50);
+        }
+
+        btnConfirm.setText("Xác nhận");
+
+        jLabel1.setText("Từ");
+
+        jLabel3.setText("Đến");
+
+        dateTo.setDateFormatString("dd , MMM , y");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel2)
-                .addContainerGap(701, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boxDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel2)
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(dateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(boxDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(dateTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnConfirm)
+                            .addComponent(jLabel3))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public LocalDate getDateFrom() {
+        Date dateStatis = dateFrom.getDate();
+        return dateStatis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+    
+    public LocalDate getDateTo() {
+        Date dateStatis = dateTo.getDate();
+        return dateStatis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
+    }
+
+    public void setBoxDate() {
+        String dateOption = boxDate.getSelectedItem().toString();
+        if (dateOption.equals("Ngày")) {
+            dateFrom.setDateFormatString("dd , MMM , y");
+            dateTo.setDateFormatString("dd , MMM , y");
+
+        } else if (dateOption.equals("Tháng")) {
+            dateFrom.setDateFormatString("MMM, y");
+            dateFrom.setDateFormatString("MMM, y");
+
+        } else if (dateOption.equals("Năm")) {
+            dateFrom.setDateFormatString("y");
+            dateFrom.setDateFormatString("y");
+
+        }
+    }
+
+    
+    public void setTableStatiscial(TreeMap<LocalDate, List<Bill>> billList) {
+
+        LocalDate localDateFrom = getDateFrom();
+        LocalDate localDateTo = getDateTo();
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tableStatiscial.getModel();
+        defaultTableModel.setRowCount(0);
+        for (Map.Entry<LocalDate, List<Bill>> entry : billList.entrySet()) {
+            System.out.println(entry.getKey().isAfter(localDateTo));
+            if (entry.getKey().isAfter(localDateFrom) && entry.getKey().isBefore(localDateTo)) {
+                List<Bill> b = entry.getValue();
+                Optional<Bill> maxBill = b.stream().max(Comparator.comparingDouble(Bill::getTotalPrice));
+                Optional<Bill> minBill = b.stream().min(Comparator.comparingDouble(Bill::getTotalPrice));
+
+                double totalPrice = b.stream().mapToDouble(Bill::getTotalPrice).sum();
+
+                
+                defaultTableModel.addRow(new Object[] {
+                        b.size(),
+                        totalPrice,
+                        totalPrice/b.size(),
+                        entry.getKey(),
+                        maxBill.get().getTotalPrice(),
+                        minBill.get().getTotalPrice(),
+                });
+            }
+        }
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        
+        for (int i = 0; i < tableStatiscial.getColumnCount(); i++) {
+            tableStatiscial.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+
+    public void setBtnConfirm(ActionListener listener) {
+        btnConfirm.addActionListener(listener);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxDate;
+    private javax.swing.JButton btnConfirm;
+    private com.toedter.calendar.JDateChooser dateFrom;
+    private com.toedter.calendar.JDateChooser dateTo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableStatiscial;
     // End of variables declaration//GEN-END:variables
 }

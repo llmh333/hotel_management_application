@@ -8,8 +8,11 @@ import com.mycompany.model.Bill;
 import com.mycompany.service.IBillService;
 import com.mycompany.util.HibernateUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 /**
  *
@@ -45,5 +48,17 @@ public class BillServiceIplm implements IBillService{
             return false;
         }
     }
-    
+
+    @Override
+    public List<Bill> getAllBills() {
+        try {
+            TypedQuery<Bill> query = entityManager.createQuery(" FROM Bill", Bill.class);
+            List<Bill> bills = query.getResultList();
+            return bills;
+        } catch (NoResultException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

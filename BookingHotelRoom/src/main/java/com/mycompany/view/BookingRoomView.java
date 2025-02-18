@@ -130,7 +130,7 @@ public class BookingRoomView extends javax.swing.JFrame {
         btnAddCustomer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAddCustomer.setFocusPainted(false);
 
-        dateChooser.setDateFormatString("y, d MMM HH:mm:ss");
+        dateChooser.setDateFormatString("y, dd MMM HH:mm:ss");
         dateChooser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

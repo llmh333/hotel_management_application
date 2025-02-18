@@ -6,6 +6,8 @@ package com.mycompany.service;
 
 import com.mycompany.model.Bill;
 
+import java.util.List;
+
 /**
  *
  * @author lminh
@@ -15,5 +17,7 @@ public interface IBillService {
     public boolean addBill(Bill bill);
     
     public boolean deleteBill(String idBill);
+
+    public List<Bill> getAllBills();
     
 }

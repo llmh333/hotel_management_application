@@ -107,14 +107,13 @@ public class PaymentPanelController {
             bigDecimal.setScale(2, RoundingMode.HALF_UP);
             totalHours = bigDecimal.doubleValue();
             double totalPrice = totalHours*room.getPrice();
-            DecimalFormat formatter = new DecimalFormat("#,###");
-            String formattedNumber = formatter.format(totalPrice);
+            
             System.out.println(totalHours);
 
             Bill bill = Bill.builder()
                     .status("Chưa thanh toán")
                     .booking(bookingSelected)
-                    .totalPrice(formattedNumber)
+                    .totalPrice(totalPrice)
                     .totalHours(totalHours)
                     .build();
             BillController billController = new BillController(new BillView(), bill, bookingSelected, PaymentPanelController.this);

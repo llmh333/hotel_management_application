@@ -317,7 +317,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dateChooser">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="y, d MMM HH:mm:ss"/>
+            <Property name="dateFormatString" type="java.lang.String" value="y, dd MMM HH:mm:ss"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>

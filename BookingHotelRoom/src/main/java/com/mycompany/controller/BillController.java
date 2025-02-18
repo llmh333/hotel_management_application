@@ -67,11 +67,15 @@ public class BillController {
         createTime = localDateTime.format(formatterTime);
         today = localDateTime.format(formatterDay);
         String checkoutTime = localDateTime.format(formatter);
+        
+        double totalPrice = bill.getTotalPrice();
 
-
+        DecimalFormat f = new DecimalFormat("#,###");
+        String formattedNumber = f.format(totalPrice);
+            
         this.billView.setBillID(bill.getId());  
         this.billView.setUserName(booking.getUser().getName());
-        this.billView.setTotalPrice(bill.getTotalPrice());
+        this.billView.setTotalPrice(formattedNumber);
         this.billView.setCreateTime(createTime);
         this.billView.setToday(today);
         this.billView.setTableBill(booking, bill, checkoutTime);
