@@ -40,7 +40,7 @@ public class InformationRoomController {
                 Customer customer = customerService.findCustomerByID(room.getCustomer_id());
                 if (customer != null) {
                     this.informationRoom.setCustomerName(customer.getName());
-                    String expectedTime =  room.getCheckInTime().toString() +" -> "+ room.getCheckOutTime().toString();
+                    String expectedTime =  room.getCheckInTime().toString();
                     this.informationRoom.setExpectTime(expectedTime);  
                 }
                 

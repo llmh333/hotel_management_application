@@ -65,6 +65,5 @@ public class Room {
     
     private LocalDateTime checkInTime;
     
-    private LocalDateTime checkOutTime;
     
 }

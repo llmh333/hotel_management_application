@@ -47,7 +47,6 @@ public class Booking {
 
     private LocalDateTime checkInTime;
 
-    private LocalDateTime checkOutTime;
 
     private LocalDateTime timeBooking;
 }

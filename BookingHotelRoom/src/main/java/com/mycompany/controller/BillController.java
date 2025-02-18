@@ -86,7 +86,6 @@ public class BillController {
             if (ans == 0) {
                 Room room = booking.getRoom();
                 room.setCheckInTime(null);
-                room.setCheckOutTime(null);
                 room.setCustomer_id(null);
                 room.setStatus(InfoRoom.STATUS_AVAILABEL);
                 roomService.changeInfoRoom(room);

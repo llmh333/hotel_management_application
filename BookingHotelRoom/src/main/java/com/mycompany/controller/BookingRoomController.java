@@ -67,7 +67,6 @@ public class BookingRoomController {
     
     public void book() {
         room.setCheckInTime(bookingRoom.getCheckinTime());
-        room.setCheckOutTime(bookingRoom.getCheckoutTime());
         room.setStatus(InfoRoom.STATUS_NOT_AVAILABEL);
         room.setCustomer_id(customer.getId());
         
@@ -75,7 +74,6 @@ public class BookingRoomController {
         System.out.println(room);
         Booking booking = Booking.builder()         
                 .checkInTime(bookingRoom.getCheckinTime())
-                .checkOutTime(bookingRoom.getCheckoutTime())
                 .customer(this.customer)
                 .room(room)
                 .user(user)
