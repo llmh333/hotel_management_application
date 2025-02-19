@@ -7,6 +7,9 @@ package com.mycompany.view;
 import com.mycompany.request.RegisterRequest;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.*;
 
 /**
@@ -45,7 +48,6 @@ public class SignupView extends javax.swing.JFrame {
         txtPhoneNummber = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtBirthday = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -55,6 +57,7 @@ public class SignupView extends javax.swing.JFrame {
         radioBtnFemale = new javax.swing.JRadioButton();
         btnBack = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
+        txtBirthday = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -85,8 +88,6 @@ public class SignupView extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Ngày sinh");
-
-        txtBirthday.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Địa chỉ");
@@ -132,6 +133,8 @@ public class SignupView extends javax.swing.JFrame {
             }
         });
 
+        txtBirthday.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -163,9 +166,9 @@ public class SignupView extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(txtPhoneNummber, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -199,9 +202,9 @@ public class SignupView extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPhoneNummber, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPhoneNummber, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(txtBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,17 +258,17 @@ public class SignupView extends javax.swing.JFrame {
         String sex = null;
         if (radioBtnFemale.isSelected()) {
             sex = "Nữ";
-        } 
-        else if (radioBtnMale.isSelected()) sex = "Nam";
+        } else if (radioBtnMale.isSelected()) sex = "Nam";
         return RegisterRequest.builder()
                 .name(txtName.getText())
                 .username(txtUsername.getText())
                 .password(txtPassword.getText())
                 .address(txtAddress.getText())
-                .birthday(txtBirthday.getText())
+                .birthday(txtBirthday.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
                 .email(txtEmail.getText())
                 .phoneNumber(txtPhoneNummber.getText())
                 .sex(sex)
+                .role("NHÂN VIÊN")
                 .build();
     }
 
@@ -289,8 +292,9 @@ public class SignupView extends javax.swing.JFrame {
         this.txtEmail.setText(txtEmail);
     }
 
-    public void setTxtBirthday(String txtBirthday) {
-        this.txtBirthday.setText(txtBirthday);
+    public void setTxtBirthday(LocalDate dateBirthday) {
+        Date date = Date.from(dateBirthday.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        this.txtBirthday.setDate(date);
     }
 
     public void setTxtAddress(String txtAddress) {
@@ -352,7 +356,7 @@ public class SignupView extends javax.swing.JFrame {
     public javax.swing.JRadioButton radioBtnFemale;
     public javax.swing.JRadioButton radioBtnMale;
     public javax.swing.JTextField txtAddress;
-    public javax.swing.JTextField txtBirthday;
+    private com.toedter.calendar.JDateChooser txtBirthday;
     public javax.swing.JTextField txtEmail;
     public javax.swing.JTextField txtName;
     public javax.swing.JPasswordField txtPassword;

@@ -41,11 +41,9 @@ public class BookingRoomController {
     private User user;
     public Customer customer;
     private List<Customer> customers;
-    private RoomMapController roomMapController;
     
-    public BookingRoomController(BookingRoomView bookingRoom, RoomMapController roomMapController, Room room, User user) {
+    public BookingRoomController(BookingRoomView bookingRoom , Room room, User user) {
        this.bookingRoom = bookingRoom;
-       this.roomMapController = roomMapController;
        this.room = room;
        this.user = user;
        this.customers = customerService.getAllCustomers();
@@ -60,8 +58,8 @@ public class BookingRoomController {
     }
 
     public void reloadCustomers() {
-        this.customers = customerService.getAllCustomers();
-        bookingRoom.reload_customers(customers);
+        this.customerService = new CustomerServiceIplm();
+        bookingRoom.reload_customers(customerService.getAllCustomers());
     }
 
     
@@ -71,7 +69,6 @@ public class BookingRoomController {
         room.setCustomer_id(customer.getId());
         
         LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println(room);
         Booking booking = Booking.builder()         
                 .checkInTime(bookingRoom.getCheckinTime())
                 .customer(this.customer)
@@ -83,7 +80,6 @@ public class BookingRoomController {
             roomService.changeInfoRoom(room);
             bookingSerive.createBooking(booking);
             JOptionPane.showMessageDialog(bookingRoom, "Đặt phòng thành công");
-            roomMapController.reload_Service();
             bookingRoom.dispose();
            
         } catch (Exception e) {
@@ -98,7 +94,6 @@ public class BookingRoomController {
             if (event.getClickCount() == 2) {
                 this.customer = bookingRoom.getSelectionPhoneNumber();
                 BookingRoomController.this.customer = this.customer;
-                System.out.println(customer);
                 bookingRoom.setName(customer.getName());
                 bookingRoom.setEmail(customer.getEmail());
                 bookingRoom.setBirthday(customer.getBirthday());

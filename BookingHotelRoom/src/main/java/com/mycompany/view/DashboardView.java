@@ -9,8 +9,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -32,6 +31,8 @@ public class DashboardView extends javax.swing.JFrame {
         panelBorderPayment.setVisible(false);
         panelBorderStatis.setVisible(false);
         panelBorderInforPerson.setVisible(false);
+        panelBorderUserMgt.setVisible(false);
+        panelBorderCusMgt.setVisible(false);
         setVisible(true);
     }
 
@@ -58,11 +59,17 @@ public class DashboardView extends javax.swing.JFrame {
         panelStatistical = new javax.swing.JPanel();
         panelBorderStatis = new javax.swing.JPanel();
         btnStatistical = new javax.swing.JButton();
+        panelCustomerManage = new javax.swing.JPanel();
+        panelBorderCusMgt = new javax.swing.JPanel();
+        btnCustomerManagement = new javax.swing.JButton();
         panelLogo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelnforPerson = new javax.swing.JPanel();
         panelBorderInforPerson = new javax.swing.JPanel();
         btnPersonInfor = new javax.swing.JButton();
+        panelUserManage = new javax.swing.JPanel();
+        panelBorderUserMgt = new javax.swing.JPanel();
+        btnUserManagement = new javax.swing.JButton();
         panelScreen = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
@@ -195,6 +202,36 @@ public class DashboardView extends javax.swing.JFrame {
         btnStatistical.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         panelStatistical.add(btnStatistical, java.awt.BorderLayout.CENTER);
 
+        panelCustomerManage.setBackground(new java.awt.Color(175, 17, 23));
+        panelCustomerManage.setLayout(new java.awt.BorderLayout());
+
+        panelBorderCusMgt.setBackground(new java.awt.Color(248, 148, 7));
+        panelBorderCusMgt.setPreferredSize(new java.awt.Dimension(5, 100));
+
+        javax.swing.GroupLayout panelBorderCusMgtLayout = new javax.swing.GroupLayout(panelBorderCusMgt);
+        panelBorderCusMgt.setLayout(panelBorderCusMgtLayout);
+        panelBorderCusMgtLayout.setHorizontalGroup(
+            panelBorderCusMgtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+        panelBorderCusMgtLayout.setVerticalGroup(
+            panelBorderCusMgtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelCustomerManage.add(panelBorderCusMgt, java.awt.BorderLayout.LINE_START);
+
+        btnCustomerManagement.setBackground(new java.awt.Color(175, 17, 23));
+        btnCustomerManagement.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCustomerManagement.setForeground(new java.awt.Color(255, 255, 255));
+        btnCustomerManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Graph Report Script.png"))); // NOI18N
+        btnCustomerManagement.setText("Quản lí khách hàng");
+        btnCustomerManagement.setBorder(null);
+        buttonGroupDashboard.add(btnCustomerManagement);
+        btnCustomerManagement.setFocusPainted(false);
+        btnCustomerManagement.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        panelCustomerManage.add(btnCustomerManagement, java.awt.BorderLayout.CENTER);
+
         panelLogo.setBackground(new java.awt.Color(175, 17, 23));
         panelLogo.setLayout(new java.awt.BorderLayout());
 
@@ -233,6 +270,36 @@ public class DashboardView extends javax.swing.JFrame {
         btnPersonInfor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         panelnforPerson.add(btnPersonInfor, java.awt.BorderLayout.CENTER);
 
+        panelUserManage.setBackground(new java.awt.Color(175, 17, 23));
+        panelUserManage.setLayout(new java.awt.BorderLayout());
+
+        panelBorderUserMgt.setBackground(new java.awt.Color(248, 148, 7));
+        panelBorderUserMgt.setPreferredSize(new java.awt.Dimension(5, 100));
+
+        javax.swing.GroupLayout panelBorderUserMgtLayout = new javax.swing.GroupLayout(panelBorderUserMgt);
+        panelBorderUserMgt.setLayout(panelBorderUserMgtLayout);
+        panelBorderUserMgtLayout.setHorizontalGroup(
+            panelBorderUserMgtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+        panelBorderUserMgtLayout.setVerticalGroup(
+            panelBorderUserMgtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelUserManage.add(panelBorderUserMgt, java.awt.BorderLayout.LINE_START);
+
+        btnUserManagement.setBackground(new java.awt.Color(175, 17, 23));
+        btnUserManagement.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUserManagement.setForeground(new java.awt.Color(255, 255, 255));
+        btnUserManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Graph Report Script.png"))); // NOI18N
+        btnUserManagement.setText("Quản lí nhân viên");
+        btnUserManagement.setBorder(null);
+        buttonGroupDashboard.add(btnUserManagement);
+        btnUserManagement.setFocusPainted(false);
+        btnUserManagement.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        panelUserManage.add(btnUserManagement, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -245,7 +312,9 @@ public class DashboardView extends javax.swing.JFrame {
                     .addComponent(panelRoomManage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelStatistical, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelnforPerson, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                    .addComponent(panelnforPerson, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(panelCustomerManage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelUserManage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -260,6 +329,10 @@ public class DashboardView extends javax.swing.JFrame {
                 .addComponent(panelPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelStatistical, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelCustomerManage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelUserManage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelnforPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -339,7 +412,13 @@ public class DashboardView extends javax.swing.JFrame {
     public void setBtnCloseAct(ActionListener listener) {
         btnClose.addActionListener(listener);
     }
-    
+    public void setBtnUserManagement(ActionListener listener) {btnUserManagement.addActionListener(listener);}
+    public void setBtnCustomerManagement(ActionListener listener) {btnCustomerManagement.addActionListener(listener);}
+
+    public void setEnableBtnUserMgt(boolean enable) {
+        btnUserManagement.setEnabled(enable);
+    }
+
     public void addPanelToPanelScreen(JPanel jPanel, String namePanel) {
         panelScreen.add(jPanel,namePanel);
     }
@@ -387,26 +466,32 @@ public class DashboardView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
+    public javax.swing.JButton btnCustomerManagement;
     public javax.swing.JButton btnPayment;
     public javax.swing.JButton btnPersonInfor;
     public javax.swing.JButton btnRoomManage;
     public javax.swing.JButton btnRoomMap;
     public javax.swing.JButton btnStatistical;
+    public javax.swing.JButton btnUserManagement;
     private javax.swing.ButtonGroup buttonGroupDashboard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel panelBoderRoomManage;
     public javax.swing.JPanel panelBoderRoomMap;
+    public javax.swing.JPanel panelBorderCusMgt;
     public javax.swing.JPanel panelBorderInforPerson;
     public javax.swing.JPanel panelBorderPayment;
     public javax.swing.JPanel panelBorderStatis;
+    public javax.swing.JPanel panelBorderUserMgt;
+    public javax.swing.JPanel panelCustomerManage;
     private javax.swing.JPanel panelLogo;
     public javax.swing.JPanel panelPayment;
     private javax.swing.JPanel panelRoomManage;
     public javax.swing.JPanel panelRoomMap;
     public javax.swing.JPanel panelScreen;
     public javax.swing.JPanel panelStatistical;
+    public javax.swing.JPanel panelUserManage;
     public javax.swing.JPanel panelnforPerson;
     // End of variables declaration//GEN-END:variables
 }

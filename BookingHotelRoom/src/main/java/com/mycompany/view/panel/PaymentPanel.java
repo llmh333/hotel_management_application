@@ -5,6 +5,8 @@
 package com.mycompany.view.panel;
 
 import com.mycompany.model.Booking;
+
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import com.mycompany.model.Customer;
@@ -258,8 +260,9 @@ public class PaymentPanel extends javax.swing.JPanel {
         txtCustomerName.setText(name);
     } 
     
-    public void setBirthday(String birthday) {
-        txtBirthday.setText(birthday);
+    public void setBirthday(LocalDate birthday) {
+        String birthdayString = birthday.toString();
+        txtBirthday.setText(birthdayString);
     }
      
     public void setEmail(String email) {

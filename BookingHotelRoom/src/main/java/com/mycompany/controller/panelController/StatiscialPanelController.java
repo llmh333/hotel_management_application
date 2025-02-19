@@ -71,23 +71,6 @@ public class StatiscialPanelController {
                 LocalDate localDateTime = bill.getPaymentTime().toLocalDate();
                 billTable.computeIfAbsent(localDateTime, k -> new ArrayList<>()).add(bill);
             }
-//            if (dateOption.equals("Ngày")) {
-//                LocalDateTime dateChoose = statisticalPanel.getDateStatiscial();
-//
-//            } else if (dateOption.equals("Tháng")) {
-//                LocalDateTime dateChoose = statisticalPanel.getDateStatiscial();
-//                for (Bill bill : bills) {
-//                    LocalDateTime localDateTime = bill.getPaymentTime();
-//                    billTable.computeIfAbsent(localDateTime, k -> new ArrayList<>()).add(bill);
-//                }
-//            } else if (dateOption.equals("Năm")) {
-//                LocalDateTime dateChoose = statisticalPanel.getDateStatiscial();
-//                for (Bill bill : bills) {
-//                    LocalDateTime localDateTime = bill.getPaymentTime().get;
-//                    billTable.computeIfAbsent(localDateTime, k -> new ArrayList<>()).add(bill);
-//                }
-//            }
-//            System.out.println();
             statisticalPanel.setTableStatiscial(billTable);
 
         }

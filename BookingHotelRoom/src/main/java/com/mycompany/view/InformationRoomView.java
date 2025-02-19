@@ -4,6 +4,10 @@
  */
 package com.mycompany.view;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 /**
  *
  * @author lminh
@@ -44,8 +48,8 @@ public class InformationRoomView extends javax.swing.JFrame {
         txtRoomPrice = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtRoomFeature = new javax.swing.JTextArea();
-        txtExpectTime = new javax.swing.JTextField();
         txtRoomStatus = new javax.swing.JLabel();
+        dateExpectTime = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,11 +104,11 @@ public class InformationRoomView extends javax.swing.JFrame {
         txtRoomFeature.setEnabled(false);
         jScrollPane1.setViewportView(txtRoomFeature);
 
-        txtExpectTime.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtExpectTime.setEnabled(false);
-
         txtRoomStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtRoomStatus.setText("ĐANG TRỐNG");
+
+        dateExpectTime.setEnabled(false);
+        dateExpectTime.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,21 +134,22 @@ public class InformationRoomView extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(txtRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(80, 80, 80)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel7)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtRoomPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRoomStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                    .addComponent(txtExpectTime))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(dateExpectTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4))
+                            .addGap(33, 33, 33)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtRoomPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRoomStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,7 +180,7 @@ public class InformationRoomView extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtExpectTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dateExpectTime, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
@@ -222,8 +227,9 @@ public class InformationRoomView extends javax.swing.JFrame {
         txtCustomerName.setText(customerName);
     }
     
-    public void setExpectTime (String expectTime) {
-        txtExpectTime.setText(expectTime);
+    public void setExpectTime (LocalDate expectTime) {
+        Date date = Date.from(expectTime.atStartOfDay(ZoneId.systemDefault()).toInstant()); 
+        dateExpectTime.setDate(date);
     }
     
     public void setRoomPrice(String roomPrice) {
@@ -263,6 +269,7 @@ public class InformationRoomView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser dateExpectTime;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -274,7 +281,6 @@ public class InformationRoomView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel txtCustomerName;
-    private javax.swing.JTextField txtExpectTime;
     private javax.swing.JTextArea txtRoomFeature;
     private javax.swing.JTextField txtRoomNumber;
     private javax.swing.JLabel txtRoomPrice;

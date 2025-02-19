@@ -16,6 +16,7 @@ import com.mycompany.service.Iplm.RoomServiceIplm;
 import com.mycompany.view.BookingRoomView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import com.mycompany.service.ICustomerService;
 
@@ -53,11 +54,11 @@ public class AddCustomerController {
             
             String name = addCustomerView.getName();
             String email = addCustomerView.getEmail();
-            String birthday = addCustomerView.getBirthday();
+            LocalDate birthday = addCustomerView.getBirthday();
             String phoneNumber = addCustomerView.getPhoneNumnber();
             String sex = addCustomerView.getSex();
             
-            if (name.isBlank() || email.isBlank() || birthday.isBlank() || phoneNumber.isBlank() || sex.isBlank()) {
+            if (name.isBlank() || email.isBlank() || birthday == null || phoneNumber.isBlank() || sex.isBlank()) {
                 JOptionPane.showMessageDialog(addCustomerView, "Vui lòng điền đầy đủ thông tin");
             } else {
                 Customer customer = Customer.builder()

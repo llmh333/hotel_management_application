@@ -9,6 +9,8 @@ import com.mycompany.request.LoginRequest;
 import com.mycompany.request.RegisterRequest;
 import com.mycompany.respone.UserRespone;
 
+import java.util.List;
+
 /**
  *
  * @author lminh
@@ -27,4 +29,13 @@ public interface IUserService {
 
     public int checkUserExists(RegisterRequest registerRequest);
 
+    public int changeInforUser(User user);
+
+    public User findUserByID(String id);
+
+    public int deleteUserByID(String id);
+
+    public int changeUserPassword(User newUser);
+
+    public List<User> getAllUsers();
 }

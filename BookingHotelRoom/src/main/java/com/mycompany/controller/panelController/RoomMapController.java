@@ -22,7 +22,6 @@ public class RoomMapController {
     private RoomMapPanel roomMapPanel;
     private IRoomService roomService = new RoomServiceIplm();
     private User user;
-    private DashboardView dashboardView;
     
     public RoomMapController(RoomMapPanel roomMapPanel, User user) {
         this.roomMapPanel = roomMapPanel;
@@ -30,9 +29,6 @@ public class RoomMapController {
         initRoomMapPanel();
     }
 
-    public void reload_Service() {
-        roomService = new RoomServiceIplm();
-    }
     
     public RoomMapPanel getRoomMapPanel() {
         return this.roomMapPanel;
@@ -64,11 +60,11 @@ public class RoomMapController {
                 formRoomPanel.setLabelRoomNumber(room.getRoomNumber());
                 formRoomPanel.setLabelRoomQuantity(room.getQuantity());
                 formRoomPanel.setLabelRoomStatus(room.getStatus());
-                new FormRoomPanelController(formRoomPanel, RoomMapController.this, room.getRoomNumber(), user);
+                new FormRoomPanelController(formRoomPanel, room.getRoomNumber(), user);
                 roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));
                 roomMapPanel.setLabelRoomNotAvail(String.valueOf(roomNotAvail));
                 roomMapPanel.setLabelRoomBusy(String.valueOf(roomBusy));
-                roomMapPanel.addFormRoomPanel(formRoomPanel);    
+                roomMapPanel.addFormRoomPanel(formRoomPanel);
             }
         } else {
             roomMapPanel.setLabelRoomAvail(String.valueOf(roomAvail));

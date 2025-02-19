@@ -24,4 +24,6 @@ public class ExitCodeConfig {
     public static int EXIT_CODE_NO_RESULT = 6;
     
     public static int EXIT_CODE_ELEMENT_EXISTS = 7;
+
+    public static int EXIT_CODE_CAN_NOT_DELETE = 8;
 }

@@ -22,6 +22,8 @@ import jakarta.persistence.Query;
 import com.mycompany.common.ExitCodeConfig;
 import jakarta.validation.ConstraintViolationException;
 
+import java.util.List;
+
 /**
  *
  * @author lminh
@@ -77,6 +79,7 @@ public class UserServiceIplm implements IUserService {
                 .sex(registerRequest.getSex())
                 .username(registerRequest.getUsername())
                 .password(registerRequest.getPassword())
+                .role(registerRequest.getRole())
                 .build();
     }
     
@@ -87,7 +90,7 @@ public class UserServiceIplm implements IUserService {
             if (checkExists == ExitCodeConfig.EXIT_CODE_OK) {
                 registerRequest.setPassword(encryptPassword(registerRequest.getPassword()));
                 entityManager.getTransaction().begin();
-                entityManager.merge(convertToUser(registerRequest));
+                entityManager.persist(convertToUser(registerRequest));
                 entityManager.getTransaction().commit();
                 return ExitCodeConfig.EXIT_CODE_OK;
             }
@@ -115,7 +118,6 @@ public class UserServiceIplm implements IUserService {
             e.printStackTrace();
         }
         return false;
-        
     }
 
     @Override
@@ -152,6 +154,76 @@ public class UserServiceIplm implements IUserService {
         }
 
         return ExitCodeConfig.EXIT_CODE_OK;
+    }
+
+    @Override
+    public int changeInforUser(User user) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(user);
+            entityManager.getTransaction().commit();
+            return ExitCodeConfig.EXIT_CODE_OK;
+        }catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+            return ExitCodeConfig.EXIT_CODE_ERROR;
+        }
+    }
+
+    @Override
+    public User findUserByID(String id) {
+        try {
+            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE id = :id", User.class);
+            query.setParameter("id", id);
+            User user = query.getSingleResult();
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int deleteUserByID(String id) {
+        try {
+            Query query = entityManager.createQuery("DELETE FROM User WHERE id = :id", User.class);
+            query.setParameter("id", id);
+            entityManager.getTransaction().begin();
+            query.executeUpdate();
+            entityManager.getTransaction().commit();
+            return ExitCodeConfig.EXIT_CODE_OK;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+            return ExitCodeConfig.EXIT_CODE_ERROR;
+        }
+
+    }
+
+    @Override
+    public int changeUserPassword(User newUser) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(newUser);
+            entityManager.getTransaction().commit();
+            return ExitCodeConfig.EXIT_CODE_OK;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+            return ExitCodeConfig.EXIT_CODE_ERROR;
+        }
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        try {
+            TypedQuery<User> query = entityManager.createQuery("FROM User", User.class);
+            List<User> users = query.getResultList();
+            return users;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

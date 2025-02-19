@@ -12,6 +12,7 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import org.hibernate.exception.ConstraintViolationException;
@@ -74,16 +75,16 @@ public class RoomServiceIplm implements IRoomService{
     @Override
     public List<Room> getAllRoom() {
         try {
-            List<Room> rooms = new ArrayList<Room>();
+            
             TypedQuery<Room> query = entityManager.createQuery("FROM Room",Room.class);
-            rooms = query.getResultList();
+            List<Room> rooms = query.getResultList();
             System.out.println(rooms);
             rooms.sort(Comparator.comparing(Room::getRoomNumber));
             return rooms;
         } catch (Exception e) {
             e.printStackTrace();
+            return Collections.emptyList();
         }
-        return null;
         
     }
 

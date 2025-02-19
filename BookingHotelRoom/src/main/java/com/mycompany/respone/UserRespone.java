@@ -4,6 +4,7 @@
  */
 package com.mycompany.respone;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +22,7 @@ import lombok.Setter;
 public class UserRespone {
     private String id ;
     private String name;
-    private String birthDay;
+    private LocalDate birthDay;
     private String email;
     private String phoneNumber;
     private String sex;

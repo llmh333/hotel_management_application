@@ -29,9 +29,8 @@ public class FormRoomPanelController {
     private User user;
     private RoomMapController roomMapController;
     
-    public FormRoomPanelController(FormRoomPanel formRoomPanel, RoomMapController roomMapController , String roomNumber, User user) {
+    public FormRoomPanelController(FormRoomPanel formRoomPanel , String roomNumber, User user) {
         this.formRoomPanel = formRoomPanel;
-        this.roomMapController = roomMapController;
         this.roomNumber = roomNumber;
         this.user = user;
         initFormRoomPanel();
@@ -49,7 +48,7 @@ public class FormRoomPanelController {
             BookingRoomView bookingRoom = new BookingRoomView();
             bookingRoom.setVisible(true);
             Room room = roomService.findRoomByRoomNumber(roomNumber);
-            BookingRoomController bookingRoomController = new BookingRoomController(bookingRoom, roomMapController, room , user);
+            BookingRoomController bookingRoomController = new BookingRoomController(bookingRoom, room , user);
         }
     }
     

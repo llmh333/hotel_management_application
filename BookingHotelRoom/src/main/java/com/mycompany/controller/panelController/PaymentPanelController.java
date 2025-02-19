@@ -74,8 +74,7 @@ public class PaymentPanelController {
             this.paymentPanel.setBtnPayment(new BtnPayment());
         }
     }
-    
-    
+
     private class SelectCustomer extends MouseAdapter {        
         public void mouseClicked(MouseEvent event) {
             if (event.getClickCount() == 2) {
@@ -98,9 +97,9 @@ public class PaymentPanelController {
         public void actionPerformed(ActionEvent e) {
             Room room = roomService.findRoomByRoomNumber(paymentPanel.getSelectionValueBooking());
             Booking bookingSelected = bookingService.findBookingByRoom(room);
-            
+            System.out.println(bookingSelected.toString());
             LocalDateTime localDateTime =  LocalDateTime.now();
-            double totalMinutes = Duration.between(bookingSelected.getCheckInTime(), localDateTime).toMinutes();
+            double totalMinutes = Duration.between(bookingSelected.getTimeBooking(), localDateTime).toMinutes();
 
             double totalHours = totalMinutes/60;
             BigDecimal bigDecimal = new BigDecimal(totalHours);

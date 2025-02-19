@@ -4,6 +4,7 @@
  */
 package com.mycompany.request;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,12 +24,13 @@ import lombok.ToString;
 @ToString
 public class RegisterRequest {
     private String name;
-    private String birthday;
+    private LocalDate birthday;
     private String username;
     private String password;
     private String email;
     private String phoneNumber;
     private String address;
     private String sex;
+    private String role;
     
 }

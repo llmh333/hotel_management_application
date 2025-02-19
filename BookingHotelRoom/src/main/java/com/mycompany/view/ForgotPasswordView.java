@@ -19,6 +19,8 @@ public class ForgotPasswordView extends javax.swing.JFrame {
     /**
      * Creates new form ForgotPasswordView
      */
+    private int timeLeft = 60;
+    private Timer timer;
     public ForgotPasswordView() {
         initComponents();
         setLocationRelativeTo(null);
@@ -51,7 +53,6 @@ public class ForgotPasswordView extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(175, 17, 23));
@@ -216,7 +217,30 @@ public class ForgotPasswordView extends javax.swing.JFrame {
     public void setbtnConfirmAction(ActionListener listener) {
         btnConfirm.addActionListener(listener);
     }
-    
+
+    public void startCountdown() {
+
+        if (timer != null && timer.isRunning()) {
+            return;
+        }
+
+        btnGetCode.setEnabled(false);
+        btnGetCode.setText(timeLeft + "s");
+
+        timer = new Timer(1000, e -> {
+            timeLeft--;
+            btnGetCode.setText(timeLeft + "s");
+
+            if (timeLeft == 0) {
+                timer.stop();
+                btnGetCode.setEnabled(true);
+                btnGetCode.setText("Lấy mã");
+                timeLeft = 60;
+            }
+        });
+        timer.start();
+    }
+
     public void setbtnBack(ActionListener listener) {
         btnBack.addActionListener(listener);
     }

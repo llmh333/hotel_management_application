@@ -42,8 +42,9 @@ public class RoomMapManageController {
     
     public void showListRoom() {
         List<Room> rooms = roomService.getAllRoom();
-        System.out.println(rooms);
-        roomManagePanel.setDataTableListRoom(rooms);
+        if (!rooms.isEmpty()) {
+            roomManagePanel.setDataTableListRoom(rooms);
+        }
         
     }
     public void initRoomManage() {
@@ -107,7 +108,6 @@ public class RoomMapManageController {
             int ansConfirm = JOptionPane.showConfirmDialog(roomManagePanel, "Xác nhận xóa phòng đã chọn", "Xóa phòng", JOptionPane.OK_CANCEL_OPTION);
             if (ansConfirm == 0) {
                 String roomNumber = roomManagePanel.getRoomSelect();
-                System.out.println(roomNumber);
                 String status = roomService.deleteRoom(roomNumber);
                 if (status.equals("Thành công")) {
                     JOptionPane.showMessageDialog(roomManagePanel, "Xóa phòng thành công");

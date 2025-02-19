@@ -10,6 +10,7 @@ import com.mycompany.service.Iplm.CustomerServiceIplm;
 import com.mycompany.view.InformationRoomView;
 import com.sun.mail.auth.OAuth2SaslClientFactory;
 import com.mycompany.service.ICustomerService;
+import java.time.LocalDate;
 
 /**
  *
@@ -40,13 +41,12 @@ public class InformationRoomController {
                 Customer customer = customerService.findCustomerByID(room.getCustomer_id());
                 if (customer != null) {
                     this.informationRoom.setCustomerName(customer.getName());
-                    String expectedTime =  room.getCheckInTime().toString();
+                    LocalDate expectedTime =  room.getCheckInTime();
                     this.informationRoom.setExpectTime(expectedTime);  
                 }
                 
             } else {
                 this.informationRoom.setCustomerName("Chưa có");
-                this.informationRoom.setExpectTime("Chưa thuê");
             }
             
 

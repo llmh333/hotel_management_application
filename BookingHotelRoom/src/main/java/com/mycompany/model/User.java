@@ -13,6 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+
+import java.time.LocalDate;
 import java.util.List;
 import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
@@ -46,7 +48,7 @@ public class User {
     private String email;
     
     @Column(columnDefinition = "varchar(100)", nullable = false)
-    private String birthday;
+    private LocalDate birthday;
     
     @Column(columnDefinition = "varchar(100)", nullable = false, unique = true)
     private String phoneNumber;
@@ -62,6 +64,9 @@ public class User {
     
     @Column(columnDefinition = "varchar(100)", nullable = false)
     private String sex;
+
+    @Column(columnDefinition = "varchar(10)", nullable = false)
+    private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;

@@ -80,7 +80,6 @@ public class AuthController {
             if (user != null) {
                 JOptionPane.showMessageDialog(signinView, "Đăng nhập thành công");
                 System.out.println(user.getId());
-
                 DashboardView dashboardView = new DashboardView();
                 DashboardController dashboardController = new DashboardController(dashboardView, user);
                 if (signinView != null) {
@@ -129,6 +128,7 @@ public class AuthController {
         @Override
         public void actionPerformed(ActionEvent e) {
             RegisterRequest registerRequest = signupView.getRegisterRequest();
+            System.out.println(registerRequest.toString());
             if (registerRequest.getEmail().isBlank()
                     || registerRequest.getPassword().isBlank()
                     || registerRequest.getUsername().isBlank()
@@ -136,7 +136,7 @@ public class AuthController {
                     || registerRequest.getSex() == null
                     || registerRequest.getPhoneNumber().isBlank()
                     || registerRequest.getAddress().isBlank()
-                    || registerRequest.getBirthday().isBlank()) {
+                    || registerRequest.getBirthday() == null) {
                 JOptionPane.showMessageDialog(signupView, "Vui lòng điền đầu đủ thông tin");
             }
             else {
@@ -150,15 +150,9 @@ public class AuthController {
                     int checkUser = userService.register(registerRequest);
                     if (checkUser == ExitCodeConfig.EXIT_CODE_OK) {
                         JOptionPane.showMessageDialog(signupView, "Đăng ký tài khoản thành công");
-                        signupView.setTxtUsername("");
-                        signupView.setTxtPassword("");
-                        signupView.setTxtEmail("");
-                        signupView.setTxtName("");
-                        signupView.setTxtAddress("");
-                        signupView.setTxtBirthday("");
-                        signupView.setTxtPhoneNummber("");
-                        signupView.setButtonGroupSex();
-
+                        if (signupView != null) {
+                            signupView.dispose();
+                        }
                     }
                     else if (checkUser == ExitCodeConfig.EXIT_CODE_EMAIL_EXISTS) {
                         System.out.println(registerRequest.toString());

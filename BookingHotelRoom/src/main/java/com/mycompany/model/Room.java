@@ -14,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -63,7 +65,7 @@ public class Room {
     @Column(name = "customer_id")
     private String customer_id;
     
-    private LocalDateTime checkInTime;
+    private LocalDate checkInTime;
     
     
 }

@@ -8,6 +8,7 @@ import com.mycompany.model.Customer;
 import com.mycompany.service.Iplm.CustomerServiceIplm;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -239,7 +240,7 @@ public class BookingRoomView extends javax.swing.JFrame {
      * @param customers
      * @param args the command line arguments
      */
-     
+
     public void reload_customers(List<Customer> customers) {
         this.customers = customers;
     }
@@ -265,6 +266,7 @@ public class BookingRoomView extends javax.swing.JFrame {
         else return "Nữ";
     }
     
+    
     public Customer getSelectionPhoneNumber() {
         String phoneNumber = listPhoneNumber.getSelectedValue();
         Customer customer = customerService.findCustomerByPhoneNumber(phoneNumber);
@@ -276,8 +278,9 @@ public class BookingRoomView extends javax.swing.JFrame {
         txtName.setText(name);
     }
     
-    public void setBirthday(String birthday) {
-        txtBirthday.setText(birthday);
+    public void setBirthday(LocalDate birthday) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        txtBirthday.setText(birthday.format(formatter));
     }
     
     public void setEmail(String email) {
@@ -318,10 +321,9 @@ public class BookingRoomView extends javax.swing.JFrame {
     }
     
     
-    public LocalDateTime getCheckinTime() {
-        Date checkinTime =  dateChooser.getDate();
-        LocalDateTime localDateTime = checkinTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        return localDateTime;
+    public LocalDate getCheckinTime() {
+        return dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
     }
     
     public void setBtnConFirm(ActionListener listener) {

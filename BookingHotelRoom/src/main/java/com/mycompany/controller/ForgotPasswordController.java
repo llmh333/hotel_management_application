@@ -17,7 +17,7 @@ import com.mycompany.common.PasswordEncryption;
 import com.mycompany.view.ForgotPasswordView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 
 /**
@@ -28,7 +28,6 @@ import javax.swing.JOptionPane;
 //zfsx nzlf nnxn wgt
 public class ForgotPasswordController {
     private ForgotPasswordView forgotPasswordView;
-//    private String otp;
     private OTPCodeRespone otpcr;
     public ForgotPasswordController(ForgotPasswordView forgotPasswordView) {
         this.forgotPasswordView = forgotPasswordView;
@@ -55,6 +54,8 @@ public class ForgotPasswordController {
             otpcr = emailOTP.sendMail(forgotPasswordRequest.getEmail());
             if (otpcr != null) {
                 System.out.println("Gui email thanh cong");
+                forgotPasswordView.startCountdown();
+
             } else {
                 JOptionPane.showMessageDialog(forgotPasswordView, "Email không tồn tại trong hệ thống");
             }

@@ -5,11 +5,7 @@
 package com.mycompany.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,7 +41,7 @@ public class Booking {
     @OneToOne(mappedBy = "booking")
     private Bill bill;
 
-    private LocalDateTime checkInTime;
+    private LocalDate checkInTime;
 
 
     private LocalDateTime timeBooking;

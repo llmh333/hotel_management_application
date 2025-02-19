@@ -13,11 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -40,7 +38,7 @@ public class Customer {
     private String name;
     
     @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String birthday;
+    private LocalDate birthday;
 
     @Column(columnDefinition = "varchar(5)", nullable = false)
     private String sex;

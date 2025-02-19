@@ -4,6 +4,7 @@
  */
 package com.mycompany.view.panel;
 
+import com.mycompany.common.InfoRoom;
 import com.mycompany.model.Room;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -294,6 +295,9 @@ public class RoomManagePanel extends javax.swing.JPanel {
                     listRoom.get(i).getQuantity(),
                     listRoom.get(i).getStatus()
             }); 
+            if (listRoom.get(i).getStatus() == InfoRoom.STATUS_AVAILABEL) {
+                
+            }
         }
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
