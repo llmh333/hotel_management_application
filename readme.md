@@ -53,5 +53,6 @@ Ngoài ra còn rất nhiều tính năng trong ứng dụng cho người dùng t
 - Thông tin cá nhân
 ##  Mô hình thiết kế cơ sở dữ liệu
 
-[](./database_diagram.png)
+[]
+(./database_diagram.png)
 
