@@ -1,4 +1,3 @@
-com\mycompany\common\ExportToPDF.class
 com\mycompany\request\ForgotPasswordRequest$ForgotPasswordRequestBuilder.class
 com\mycompany\service\Iplm\EmailServiceIplm$1.class
 com\mycompany\respone\OTPCodeRespone.class
