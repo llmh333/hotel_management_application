@@ -144,7 +144,7 @@ public class AuthController {
                     || registerRequest.getPhoneNumber().isBlank()
                     || registerRequest.getAddress().isBlank()
                     || registerRequest.getBirthday() == null) {
-                JOptionPane.showMessageDialog(signupView, "Vui lòng điền đầu đủ thông tin");
+                JOptionPane.showMessageDialog(signupView, "Vui lòng điền đầy đủ thông tin");
             }
             else {
                 if (Validator.isValidEmail(registerRequest.getEmail()) == false) {

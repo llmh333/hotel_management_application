@@ -59,9 +59,9 @@ public class CustomerManagementController {
                 String sex = customerManagement.getSex();
                 if (name.isBlank() || email.isBlank() || phoneNumber.isBlank() || sex.isBlank() || birthday == null) {
                     JOptionPane.showMessageDialog(customerManagement, "Vui lòng điền đầy đủ thông tin");
-                } else if (Validator.isValidEmail(email)) {
+                } else if (!Validator.isValidEmail(email)) {
                     JOptionPane.showMessageDialog(customerManagement, "Email không hợp lệ");
-                } else if (Validator.isValidPhoneNumber(phoneNumber)) {
+                } else if (!Validator.isValidPhoneNumber(phoneNumber)) {
                     JOptionPane.showMessageDialog(customerManagement, "Số điện thoại không hợp lệ");
                 } else {
                     Customer customer = Customer.builder()

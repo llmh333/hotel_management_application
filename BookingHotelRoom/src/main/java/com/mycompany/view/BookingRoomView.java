@@ -319,11 +319,11 @@ public class BookingRoomView extends javax.swing.JFrame {
         });
         this.listPhoneNumber.setModel(defaultListModel);
     }
-    
-    
+
+
     public LocalDate getCheckinTime() {
-        return dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
+        if (dateChooser.getDate() != null) { return null; }
+        else return dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
     public void setBtnConFirm(ActionListener listener) {

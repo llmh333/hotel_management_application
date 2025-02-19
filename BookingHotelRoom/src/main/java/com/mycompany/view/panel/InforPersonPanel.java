@@ -236,7 +236,10 @@ public class InforPersonPanel extends javax.swing.JPanel {
     }
 
     public LocalDate getBirthday() {
-        return dateBirthday.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Date date = dateBirthday.getDate();
+        if (date == null) {
+            return null;
+        } else return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     public String getSex() {

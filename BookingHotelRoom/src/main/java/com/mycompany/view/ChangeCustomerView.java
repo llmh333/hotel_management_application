@@ -45,7 +45,7 @@ public class ChangeCustomerView extends javax.swing.JFrame {
         boxSex = new javax.swing.JComboBox<>();
         btnConfirm = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(248, 148, 7));
@@ -150,7 +150,8 @@ public class ChangeCustomerView extends javax.swing.JFrame {
     }
 
     public LocalDate getBirthday() {
-        return dateBirthday.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (dateBirthday.getDate() == null) return null;
+        else return dateBirthday.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     public String getSex() {

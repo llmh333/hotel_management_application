@@ -259,12 +259,16 @@ public class SignupView extends javax.swing.JFrame {
         if (radioBtnFemale.isSelected()) {
             sex = "Nữ";
         } else if (radioBtnMale.isSelected()) sex = "Nam";
+        LocalDate birthday = null;
+        if (txtBirthday.getDate() != null) {
+            birthday = txtBirthday.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
         return RegisterRequest.builder()
                 .name(txtName.getText())
                 .username(txtUsername.getText())
                 .password(txtPassword.getText())
                 .address(txtAddress.getText())
-                .birthday(txtBirthday.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                .birthday(birthday)
                 .email(txtEmail.getText())
                 .phoneNumber(txtPhoneNummber.getText())
                 .sex(sex)

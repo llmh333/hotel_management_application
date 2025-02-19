@@ -6,6 +6,7 @@ package com.mycompany.controller;
 
 import com.mycompany.common.ExitCodeConfig;
 import static com.mycompany.common.ExitCodeConfig.*;
+import com.mycompany.common.Validator;
 import com.mycompany.service.Iplm.CustomerServiceIplm;
 import com.mycompany.view.AddCustomerView;
 import com.mycompany.model.Customer;
@@ -60,6 +61,10 @@ public class AddCustomerController {
             
             if (name.isBlank() || email.isBlank() || birthday == null || phoneNumber.isBlank() || sex.isBlank()) {
                 JOptionPane.showMessageDialog(addCustomerView, "Vui lòng điền đầy đủ thông tin");
+            } else if (!(Validator.isValidPhoneNumber(phoneNumber))){
+                JOptionPane.showMessageDialog(addCustomerView, "Số điện thoại không hợp lệ");
+            } else if (!Validator.isValidEmail(email)) {
+                JOptionPane.showMessageDialog(addCustomerView, "Email không hợp lệ");
             } else {
                 Customer customer = Customer.builder()
                         .name(name)

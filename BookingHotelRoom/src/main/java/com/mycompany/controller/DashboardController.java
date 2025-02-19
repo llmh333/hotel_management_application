@@ -270,7 +270,6 @@ public class DashboardController {
                 userService.statusUser(user.getId(), "offline");
                 System.exit(0);
             }
-            System.exit(0);
         }
     }
     

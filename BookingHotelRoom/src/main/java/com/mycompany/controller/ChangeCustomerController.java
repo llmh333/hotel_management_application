@@ -5,6 +5,7 @@
 package com.mycompany.controller;
 
 import com.mycompany.common.ExitCodeConfig;
+import com.mycompany.common.Validator;
 import com.mycompany.controller.panelController.CustomerManagementController;
 import com.mycompany.model.Customer;
 import com.mycompany.service.ICustomerService;
@@ -14,6 +15,7 @@ import com.mycompany.view.ChangeCustomerView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 /**
  *
@@ -54,24 +56,38 @@ public class ChangeCustomerController {
     private class Confirm implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            customer.setName(changeCustomerView.getName());
-            customer.setEmail(changeCustomerView.getEmail());
-            customer.setPhoneNumber(changeCustomerView.getPhoneNumber());
-            customer.setBirthday(changeCustomerView.getBirthday());
-            customer.setSex(changeCustomerView.getSex());
+            String name = customer.getName();
+            String email = customer.getEmail();
+            String phoneNumber = customer.getPhoneNumber();
+            String sex = customer.getSex();
+            LocalDate birthday = customer.getBirthday();
+            if (name.isBlank() || email.isBlank() || phoneNumber.isBlank() || sex.isBlank() || birthday == null) {
+                JOptionPane.showMessageDialog(changeCustomerView, "Vui lòng điền đầy đủ thông tin");
+            } else if (!Validator.isValidEmail(email)) {
+                JOptionPane.showMessageDialog(changeCustomerView,"Email không hợp lệ");
+            } else if (!Validator.isValidPhoneNumber(phoneNumber)) {
+                JOptionPane.showMessageDialog(changeCustomerView, "Số điện thoại không hợp lệ");
+            } else {
+                customer.setName(name);
+                customer.setEmail(email);
+                customer.setPhoneNumber(phoneNumber);
+                customer.setBirthday(birthday);
+                customer.setSex(sex);
 
-            int checkChange = customerService.changeInfoCustomer(customer);
-            if (checkChange == ExitCodeConfig.EXIT_CODE_OK) {
-                JOptionPane.showMessageDialog(changeCustomerView, "Thay đổi thông tin khách hàng thành công");
-                customerManagementController.updateCustomerTable();
-                changeCustomerView.dispose();
+                int checkChange = customerService.changeInfoCustomer(customer);
+                if (checkChange == ExitCodeConfig.EXIT_CODE_OK) {
+                    JOptionPane.showMessageDialog(changeCustomerView, "Thay đổi thông tin khách hàng thành công");
+                    customerManagementController.updateCustomerTable();
+                    changeCustomerView.dispose();
+                }
+                else if (checkChange == ExitCodeConfig.EXIT_CODE_ERROR) {
+                    JOptionPane.showMessageDialog(changeCustomerView, "Có lỗi xảy ra, vui lòng thử lại");
+                }
+                else if (checkChange == ExitCodeConfig.EXIT_CODE_NO_RESULT) {
+                    JOptionPane.showMessageDialog(changeCustomerView, "Không tồn tại khách hàng này");
+                }
             }
-            else if (checkChange == ExitCodeConfig.EXIT_CODE_ERROR) {
-                JOptionPane.showMessageDialog(changeCustomerView, "Có lỗi xảy ra, vui lòng thử lại");
-            }
-            else if (checkChange == ExitCodeConfig.EXIT_CODE_NO_RESULT) {
-                JOptionPane.showMessageDialog(changeCustomerView, "Không tồn tại khách hàng này");
-            }
+
 
         }
     }

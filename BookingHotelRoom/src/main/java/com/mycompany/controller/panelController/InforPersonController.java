@@ -18,6 +18,7 @@ import com.mycompany.view.panel.InforPersonPanel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 /**
  *
@@ -67,20 +68,29 @@ public class InforPersonController {
 
             int ans = JOptionPane.showConfirmDialog(inforPersonPanel,"Bạn chắc chắn muốn thay đổi thông tin", "Thay đổi thông tin cá nhân", JOptionPane.OK_CANCEL_OPTION);
             if (ans == JOptionPane.OK_OPTION) {
-                User oldUser = userService.findUserByID(user.getId());
+                String name = inforPersonPanel.getName();
+                String email = inforPersonPanel.getEmail();
+                String phoneNumber = inforPersonPanel.getPhoneNumber();
+                String address = inforPersonPanel.getAddress();
+                String role = inforPersonPanel.getRole();
+                String sex = inforPersonPanel.getSex();
+                LocalDate birthday = inforPersonPanel.getBirthday();
 
-                if (Validator.isValidEmail(inforPersonPanel.getEmail())) {
+                if (name.isBlank() || email.isBlank() || phoneNumber.isBlank() || address.isBlank() || role.isBlank() || sex.isBlank() || birthday == null) {
+                    JOptionPane.showMessageDialog(inforPersonPanel, "Vui lòng điền đầy đủ thông tin");
+                } else if (!Validator.isValidEmail(inforPersonPanel.getEmail())) {
                     JOptionPane.showMessageDialog(inforPersonPanel, "Email không hợp lệ");
-                } else if (Validator.isValidPhoneNumber(inforPersonPanel.getPhoneNumber())) {
+                } else if (!Validator.isValidPhoneNumber(inforPersonPanel.getPhoneNumber())) {
                     JOptionPane.showMessageDialog(inforPersonPanel, "Số điện thoại không hợp lệ");
                 } else {
-                    oldUser.setAddress(inforPersonPanel.getAddress());
-                    oldUser.setEmail(inforPersonPanel.getEmail());
-                    oldUser.setPhoneNumber(inforPersonPanel.getPhoneNumber());
-                    oldUser.setBirthday(inforPersonPanel.getBirthday());
-                    oldUser.setRole(inforPersonPanel.getRole());
-                    oldUser.setName(inforPersonPanel.getName());
-                    oldUser.setSex(inforPersonPanel.getSex());
+                    User oldUser = userService.findUserByID(user.getId());
+                    oldUser.setAddress(address);
+                    oldUser.setEmail(email);
+                    oldUser.setPhoneNumber(phoneNumber);
+                    oldUser.setBirthday(birthday);
+                    oldUser.setRole(role);
+                    oldUser.setName(name);
+                    oldUser.setSex(sex);
 
                     int checkChangeInfor = userService.changeInforUser(oldUser);
                     if (checkChangeInfor == ExitCodeConfig.EXIT_CODE_OK) {

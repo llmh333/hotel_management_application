@@ -94,12 +94,12 @@ public class UserServiceIplm implements IUserService {
                 return ExitCodeConfig.EXIT_CODE_OK;
             }
             else return checkExists;
-        } catch (NoResultException e) {
-            ExceptionHandler.NoResultException();
         } catch (ConstraintViolationException e) {
             return ExitCodeConfig.EXIT_CODE_EMAIL_INVALID;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ExitCodeConfig.EXIT_CODE_ERROR;
         }
-        return ExitCodeConfig.EXIT_CODE_ERROR;
         
     }
 
