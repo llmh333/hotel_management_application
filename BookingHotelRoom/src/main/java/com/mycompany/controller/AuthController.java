@@ -78,12 +78,19 @@ public class AuthController {
             LoginRequest loginRequest = signinView.getLoginRequest();
             User user = userService.login(loginRequest);
             if (user != null) {
-                JOptionPane.showMessageDialog(signinView, "Đăng nhập thành công");
-                System.out.println(user.getId());
-                DashboardView dashboardView = new DashboardView();
-                DashboardController dashboardController = new DashboardController(dashboardView, user);
-                if (signinView != null) {
-                    signinView.dispose();
+                if (user.getStatus().equals("online")) {
+                    JOptionPane.showMessageDialog(signinView, "Tài khoản đang đăng nhập ở nơi khác");
+                    userService = new UserServiceIplm();
+                }
+                else {
+                    JOptionPane.showMessageDialog(signinView, "Đăng nhập thành công");
+                    User u = userService.findUserByID(user.getId());
+                    userService.statusUser(user.getId(), "online");
+                    DashboardView dashboardView = new DashboardView();
+                    DashboardController dashboardController = new DashboardController(dashboardView, user);
+                    if (signinView != null) {
+                        signinView.dispose();
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(signinView, "Tài khoản hoặc mật khẩu không chính xác");

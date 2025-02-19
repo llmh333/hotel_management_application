@@ -9,6 +9,7 @@ import com.mycompany.model.Customer;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -209,7 +210,10 @@ public class CustomerManagement extends javax.swing.JPanel {
     }
     
     public LocalDate getBirthday() {
-        return dateBirthday.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Date date = dateBirthday.getDate();
+        if (date == null) {
+            return null;
+        } else return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
     public void setBtnAddCustomer(ActionListener listener) {

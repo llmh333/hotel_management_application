@@ -68,6 +68,9 @@ public class User {
     @Column(columnDefinition = "varchar(10)", nullable = false)
     private String role;
 
+    @Column(columnDefinition = "varchar(10)")
+    private String status;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
 }

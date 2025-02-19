@@ -40,8 +40,6 @@ public class UserServiceIplm implements IUserService {
             User user = query.getSingleResult();
             if (user != null) {
                 if (user.getUsername().equals(loginRequest.getUsername()) && checkPassword(loginRequest.getPassword(), user.getPassword())) {
-                    user.setUsername(null);
-                    user.setPassword(null);
                     return user;
                 }
             } else return null;
@@ -80,6 +78,7 @@ public class UserServiceIplm implements IUserService {
                 .username(registerRequest.getUsername())
                 .password(registerRequest.getPassword())
                 .role(registerRequest.getRole())
+                .status("offline")
                 .build();
     }
     
@@ -223,6 +222,23 @@ public class UserServiceIplm implements IUserService {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public boolean statusUser(String userID, String status) {
+        try {
+            Query query = entityManager.createQuery("update User set status = :status where id = :userID");
+            query.setParameter("status", status);
+            query.setParameter("userID", userID);
+            entityManager.getTransaction().begin();
+            query.executeUpdate();
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+
         }
     }
 

@@ -21,7 +21,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 public class RegisterRequest {
     private String name;
     private LocalDate birthday;

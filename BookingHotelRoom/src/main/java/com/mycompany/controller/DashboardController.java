@@ -9,7 +9,9 @@ import com.mycompany.common.InfoRoom;
 import com.mycompany.model.Room;
 import com.mycompany.model.User;
 import com.mycompany.service.IRoomService;
+import com.mycompany.service.IUserService;
 import com.mycompany.service.Iplm.RoomServiceIplm;
+import com.mycompany.service.Iplm.UserServiceIplm;
 import com.mycompany.util.HibernateUtil;
 import com.mycompany.view.DashboardView;
 import com.mycompany.view.panel.*;
@@ -18,8 +20,10 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -29,6 +33,7 @@ public class DashboardController {
     private final Color redColor = new Color(175,17,23);
     private final Color darkRedColor = new Color(140,17,23);
     private DashboardView dashboardView;
+    private IUserService userService = new UserServiceIplm();
     private User user;
     
     public DashboardController(DashboardView dashboardView, User user) {
@@ -37,8 +42,12 @@ public class DashboardController {
         initDashboardView();
     }
 
-           
+    private void handleExit() {
+
+    }
+
     public void initDashboardView() {
+
 
         RoomMapController roomMapController = new RoomMapController(new RoomMapPanel(),user);
         RoomMapPanel roomMapPanel = roomMapController.getRoomMapPanel();
@@ -256,6 +265,11 @@ public class DashboardController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            int option = JOptionPane.showConfirmDialog(dashboardView, "Bạn có chắc chắn muốn thoát?", "Xác nhận thoát", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (option == JOptionPane.YES_OPTION) {
+                userService.statusUser(user.getId(), "offline");
+                System.exit(0);
+            }
             System.exit(0);
         }
     }

@@ -128,12 +128,16 @@ public class StatisticalPanel extends javax.swing.JPanel {
 
     public LocalDate getDateFrom() {
         Date dateStatis = dateFrom.getDate();
-        return dateStatis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (dateStatis == null) {
+            return null;
+        } else return dateStatis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
     public LocalDate getDateTo() {
         Date dateStatis = dateTo.getDate();
-        return dateStatis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (dateStatis == null) {
+            return null;
+        } else return dateStatis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
     }
 
@@ -159,10 +163,10 @@ public class StatisticalPanel extends javax.swing.JPanel {
 
         LocalDate localDateFrom = getDateFrom();
         LocalDate localDateTo = getDateTo();
+        if (localDateFrom == null || localDateTo == null) { return; }
         DefaultTableModel defaultTableModel = (DefaultTableModel) tableStatiscial.getModel();
         defaultTableModel.setRowCount(0);
         for (Map.Entry<LocalDate, List<Bill>> entry : billList.entrySet()) {
-            System.out.println(entry.getKey().isAfter(localDateTo));
             if (entry.getKey().isAfter(localDateFrom) && entry.getKey().isBefore(localDateTo)) {
                 List<Bill> b = entry.getValue();
                 Optional<Bill> maxBill = b.stream().max(Comparator.comparingDouble(Bill::getTotalPrice));

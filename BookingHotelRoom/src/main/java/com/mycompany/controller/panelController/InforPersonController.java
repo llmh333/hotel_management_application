@@ -5,6 +5,7 @@
 package com.mycompany.controller.panelController;
 
 import com.mycompany.common.ExitCodeConfig;
+import com.mycompany.common.Validator;
 import com.mycompany.controller.ChangeCustomerController;
 import com.mycompany.controller.ChangeUserPasswordController;
 import com.mycompany.model.User;
@@ -68,22 +69,29 @@ public class InforPersonController {
             if (ans == JOptionPane.OK_OPTION) {
                 User oldUser = userService.findUserByID(user.getId());
 
-                oldUser.setAddress(inforPersonPanel.getAddress());
-                oldUser.setEmail(inforPersonPanel.getEmail());
-                oldUser.setPhoneNumber(inforPersonPanel.getPhoneNumber());
-                oldUser.setBirthday(inforPersonPanel.getBirthday());
-                oldUser.setRole(inforPersonPanel.getRole());
-                oldUser.setName(inforPersonPanel.getName());
-                oldUser.setSex(inforPersonPanel.getSex());
+                if (Validator.isValidEmail(inforPersonPanel.getEmail())) {
+                    JOptionPane.showMessageDialog(inforPersonPanel, "Email không hợp lệ");
+                } else if (Validator.isValidPhoneNumber(inforPersonPanel.getPhoneNumber())) {
+                    JOptionPane.showMessageDialog(inforPersonPanel, "Số điện thoại không hợp lệ");
+                } else {
+                    oldUser.setAddress(inforPersonPanel.getAddress());
+                    oldUser.setEmail(inforPersonPanel.getEmail());
+                    oldUser.setPhoneNumber(inforPersonPanel.getPhoneNumber());
+                    oldUser.setBirthday(inforPersonPanel.getBirthday());
+                    oldUser.setRole(inforPersonPanel.getRole());
+                    oldUser.setName(inforPersonPanel.getName());
+                    oldUser.setSex(inforPersonPanel.getSex());
 
-                int checkChangeInfor = userService.changeInforUser(oldUser);
-                if (checkChangeInfor == ExitCodeConfig.EXIT_CODE_OK) {
-                    JOptionPane.showMessageDialog(inforPersonPanel, "Thay đổi thông tin thành công");
-                    InforPersonController.this.setInformationPanel();
+                    int checkChangeInfor = userService.changeInforUser(oldUser);
+                    if (checkChangeInfor == ExitCodeConfig.EXIT_CODE_OK) {
+                        JOptionPane.showMessageDialog(inforPersonPanel, "Thay đổi thông tin thành công");
+                        InforPersonController.this.setInformationPanel();
 
-                } else if (checkChangeInfor == ExitCodeConfig.EXIT_CODE_ERROR) {
-                    JOptionPane.showMessageDialog(inforPersonPanel, "Có lỗi xảy ra, vui lòng thử lại");
+                    } else if (checkChangeInfor == ExitCodeConfig.EXIT_CODE_ERROR) {
+                        JOptionPane.showMessageDialog(inforPersonPanel, "Có lỗi xảy ra, vui lòng thử lại");
+                    }
                 }
+
             }
 
         }

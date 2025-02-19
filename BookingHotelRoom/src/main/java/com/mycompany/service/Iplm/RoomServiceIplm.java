@@ -78,7 +78,6 @@ public class RoomServiceIplm implements IRoomService{
             
             TypedQuery<Room> query = entityManager.createQuery("FROM Room",Room.class);
             List<Room> rooms = query.getResultList();
-            System.out.println(rooms);
             rooms.sort(Comparator.comparing(Room::getRoomNumber));
             return rooms;
         } catch (Exception e) {

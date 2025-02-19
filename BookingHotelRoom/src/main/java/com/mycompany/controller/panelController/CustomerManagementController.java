@@ -5,6 +5,7 @@
 package com.mycompany.controller.panelController;
 
 import com.mycompany.common.ExitCodeConfig;
+import com.mycompany.common.Validator;
 import com.mycompany.controller.ChangeCustomerController;
 import com.mycompany.model.Customer;
 import com.mycompany.service.ICustomerService;
@@ -15,6 +16,7 @@ import com.mycompany.view.panel.CustomerManagement;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -50,22 +52,36 @@ public class CustomerManagementController {
         public void actionPerformed(ActionEvent e) {
             int ans = JOptionPane.showConfirmDialog(customerManagement, "Xác nhận thêm khách hàng mới", "Thêm khách hàng", JOptionPane.OK_CANCEL_OPTION);
             if (ans == JOptionPane.OK_OPTION) {
-                Customer customer = Customer.builder()
-                        .name(customerManagement.getCustomerName())
-                        .birthday(customerManagement.getBirthday())
-                        .sex(customerManagement.getSex())
-                        .email(customerManagement.getEmail())
-                        .phoneNumber(String.valueOf(customerManagement.getPhoneNumber()))
-                        .build();
-                int checkAdd = customerService.addCustomer(customer);
-                if (checkAdd == ExitCodeConfig.EXIT_CODE_OK) {
-                    JOptionPane.showMessageDialog(customerManagement, "Thêm khách hàng mới thành công");
-                    CustomerManagementController.this.updateCustomerTable();
-                } else if (checkAdd == ExitCodeConfig.EXIT_CODE_ELEMENT_EXISTS) {
-                    JOptionPane.showMessageDialog(customerManagement, "Số điện thoại hoặc Email đã tồn tại");
-                } else if (checkAdd == ExitCodeConfig.EXIT_CODE_ERROR) {
-                    JOptionPane.showMessageDialog(customerManagement, "Có lỗi xảy ra vui lòng thử lại");
+                String name = customerManagement.getCustomerName();
+                String email = customerManagement.getEmail();
+                String phoneNumber = customerManagement.getPhoneNumber();
+                LocalDate birthday = customerManagement.getBirthday();
+                String sex = customerManagement.getSex();
+                if (name.isBlank() || email.isBlank() || phoneNumber.isBlank() || sex.isBlank() || birthday == null) {
+                    JOptionPane.showMessageDialog(customerManagement, "Vui lòng điền đầy đủ thông tin");
+                } else if (Validator.isValidEmail(email)) {
+                    JOptionPane.showMessageDialog(customerManagement, "Email không hợp lệ");
+                } else if (Validator.isValidPhoneNumber(phoneNumber)) {
+                    JOptionPane.showMessageDialog(customerManagement, "Số điện thoại không hợp lệ");
+                } else {
+                    Customer customer = Customer.builder()
+                            .name(name)
+                            .birthday(birthday)
+                            .sex(sex)
+                            .email(email)
+                            .phoneNumber(phoneNumber)
+                            .build();
+                    int checkAdd = customerService.addCustomer(customer);
+                    if (checkAdd == ExitCodeConfig.EXIT_CODE_OK) {
+                        JOptionPane.showMessageDialog(customerManagement, "Thêm khách hàng mới thành công");
+                        CustomerManagementController.this.updateCustomerTable();
+                    } else if (checkAdd == ExitCodeConfig.EXIT_CODE_ELEMENT_EXISTS) {
+                        JOptionPane.showMessageDialog(customerManagement, "Số điện thoại hoặc Email đã tồn tại");
+                    } else if (checkAdd == ExitCodeConfig.EXIT_CODE_ERROR) {
+                        JOptionPane.showMessageDialog(customerManagement, "Có lỗi xảy ra vui lòng thử lại");
+                    }
                 }
+
             }
         }
     }

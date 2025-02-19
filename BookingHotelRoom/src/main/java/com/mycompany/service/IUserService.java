@@ -38,4 +38,6 @@ public interface IUserService {
     public int changeUserPassword(User newUser);
 
     public List<User> getAllUsers();
+
+    public boolean statusUser(String userID, String status);
 }

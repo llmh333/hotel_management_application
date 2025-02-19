@@ -7,6 +7,7 @@ package com.mycompany.view;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 
 /**
  *
@@ -168,7 +169,10 @@ public class AddCustomerView extends javax.swing.JFrame {
     }
     
     public LocalDate getBirthday() {
-        return dateBirthday.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Date date = dateBirthday.getDate();
+        if (date == null) {
+            return null;
+        } else return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
     public String getEmail() {

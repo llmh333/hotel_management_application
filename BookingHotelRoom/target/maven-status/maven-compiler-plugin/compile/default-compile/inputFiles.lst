@@ -1,6 +1,7 @@
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\bookinghotelroom\BookingHotelRoom.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\ExceptionHandler.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\ExitCodeConfig.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\ExportToPDF.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\InfoRoom.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\MailConfig.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\common\PasswordEncryption.java
@@ -11,15 +12,18 @@ D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\BillCont
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\BookingRoomController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ChangeCustomerController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ChangeInfoRoomController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ChangeUserPasswordController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\DashboardController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\ForgotPasswordController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\InformationRoomController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\panelController\CustomerManagementController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\panelController\FormRoomPanelController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\panelController\InforPersonController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\panelController\PaymentPanelController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\panelController\RoomMapController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\panelController\RoomMapManageController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\panelController\StatiscialPanelController.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\controller\panelController\UserManagementController.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\dao\UserDAO.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\model\Bill.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\model\Booking.java
@@ -51,6 +55,7 @@ D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\BillView.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\BookingRoomView.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\ChangeCustomerView.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\ChangeInfoRoomView.java
+D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\ChangeUserPasswordView.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\DashboardView.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\ForgotPasswordView.java
 D:\BTL_HIT_JAVA\BookingHotelRoom\src\main\java\com\mycompany\view\InformationRoomView.java
