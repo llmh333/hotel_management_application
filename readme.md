@@ -22,7 +22,7 @@ Công nghệ sử dụng
 
 Frontend: Java Swing
 
-Backend: Spring Framework (Spring Boot, Spring Security, Spring Data JPA)
+Backend: Java Core
 
 Cơ sở dữ liệu: MySQL
 
